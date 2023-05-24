@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+<script src="script.js" defer></script>
+<link rel="stylesheet" href="styles.css">
+<title>Labb Valpefôr Kalkulator</title>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+    <a href="https://labb.no/" target="_blank"><img src="Logo-Labb.png" alt="Labb logo" class="labb-logo"></a>
+    <h1>H U N D</h1>
+    </div>
+    <div class="nocorners">
+    <form id="puppyForm" class="valp">
+      <div id="nav" class="nav">
+        <img src="left-arrow.png" id="left" alt="Left" class="arrow"><h3 id="kategori">VALP</h3><img src="right-arrow.png" id="right" alt="Right" class="arrow">
+      </div>
+      <div class="input-container ic1">
+        <input type="number" id="age" name="age" required min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
+        <div id="cut" class="cut"></div>
+        <label for="age" class="placeholder">Alder (i måneder)</label>
+      </div>
+
+      <div class="input-container ic2">
+        <input type="number" id="weight" name="weight" required min="1" max="80" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
+        <div id="cut2" class="cut cut2"></div>
+        <label for="weight" class="placeholder">Vekt (i kilo)</label>
+      </div>
+      
+      <div class="activity">
+        <label for="activity"><h2>Aktivitetsnivå:</h2></label>
+        <select id="activity">
+            <option value="">-- Velg aktivitetsnivå --</option>
+            <option value="low">Lavt</option>
+            <option value="medium">Middels</option>
+            <option value="high">Høyt</option>
+        </select>
+      </div>
+
+      <button type="submit" class="button-hover">Regn ut</button>
+
+    </form>
+    </div>
+    <div class="border-container">
+    <div id="result" class="result">
+      <h2>Anbefalt mengde:</h2>
+      <p id="foodAmount" class="amount"></p>
+    </div>
+
+        <div class="FK-container">
+
+            <a id="stort" href="valp.webp" data-fancybox data-caption="Labb Valp hundefôr mellom- og store raser 15 kg">
+            <img id="lite" src="valp.png" alt="15kg pose" class="pose" />
+            </a>              
+
+            <a href="https://www.felleskjopet.no/kjaeledyr/hund/hundefor-og-tilskudd/toerrfor/labb-valp-mellstor-15kg-12343/" target="_blank">
+            <img src="FK.svg" alt="Felleskjøpet logo" class="FK">
+            </a>
+
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>
