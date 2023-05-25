@@ -25,12 +25,12 @@
         <label for="age" class="placeholder">Alder (i måneder)</label>
       </div>
 
-      <div class="input-container ic2">
+      <div class="replace ic2">
         <input type="number" id="weight" name="weight" required min="1" max="80" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
         <div id="cut2" class="cut cut2"></div>
         <label for="weight" class="placeholder">Vekt (i kilo)</label>
       </div>
-      
+
       <div class="activity">
         <label for="activity"><h2>Aktivitetsnivå:</h2></label>
         <select id="activity">
@@ -47,8 +47,10 @@
     </div>
     <div class="border-container">
     <div id="result" class="result">
-      <h2>Anbefalt mengde:</h2>
+      <h2 id="valph2">Anbefalt mengde:</h2>
       <p id="foodAmount" class="amount"></p>
+      <h2 id="adulth2">Anbefalt mengde:</h2>
+      <p id="foodAmountADULT" class="amount"></p>
     </div>
 
         <div class="FK-container">
