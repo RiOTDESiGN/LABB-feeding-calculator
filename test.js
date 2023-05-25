@@ -282,3 +282,80 @@ function calculateFoodAmount(age, weight, activity, kategori) {
         if (activeProfile === 'VOKSEN' || activeProfile === 'SENIOR' || activeProfile === 'SENSITIV' || activeProfile === 'VEKTKONTROLL') {
         replaceInputField();
         }
+
+
+
+
+
+        const foodAmountsADULT = [
+          {
+              kategori: "VOKSEN",
+              weightRanges: [
+                    { caWeight: 15, amount: "220" },
+                    { caWeight: 20, amount: "280" },
+                    { caWeight: 25, amount: "320" },
+                    { caWeight: 30, amount: "360" },
+                    { caWeight: 35, amount: "400" },
+                    { caWeight: 40, amount: "440" },
+                    { caWeight: 45, amount: "480" },
+                    { caWeight: 50, amount: "520" },
+                    { caWeight: 55, amount: "560" },
+                    { caWeight: 60, amount: "600" },
+                    { caWeight: 70, amount: "680" },
+                    { caWeight: 80, amount: "770" },
+                  ]
+            },
+            {
+              kategori: "SENIOR",
+              weightRanges: [
+                    { caWeight: 15, amount: "200" },
+                    { caWeight: 20, amount: "240" },
+                    { caWeight: 25, amount: "280" },
+                    { caWeight: 30, amount: "320" },
+                    { caWeight: 35, amount: "365" },
+                    { caWeight: 40, amount: "400" },
+                    { caWeight: 45, amount: "440" },
+                    { caWeight: 50, amount: "480" },
+                    { caWeight: 55, amount: "510" },
+                    { caWeight: 60, amount: "545" },
+                    { caWeight: 70, amount: "640" },
+                    { caWeight: 80, amount: "720" },
+                    { caWeight: 90, amount: "810" },
+                  ]
+            },
+            {
+              kategori: "VEKTKONTROLL",
+              weightRanges: [
+                    { caWeight: 15, amount: "210" },
+                    { caWeight: 20, amount: "240" },
+                    { caWeight: 25, amount: "280" },
+                    { caWeight: 30, amount: "320" },
+                    { caWeight: 35, amount: "365" },
+                    { caWeight: 40, amount: "400" },
+                    { caWeight: 45, amount: "440" },
+                    { caWeight: 50, amount: "480" },
+                    { caWeight: 55, amount: "510" },
+                    { caWeight: 60, amount: "545" },
+                    { caWeight: 70, amount: "640" },
+                    { caWeight: 80, amount: "720" },
+                    { caWeight: 90, amount: "810" },
+                  ]
+            },
+            {
+              kategori: "SENSITIV",
+              weightRanges: [
+                    { caWeight: 15, amount: "210" },
+                    { caWeight: 20, amount: "270" },
+                    { caWeight: 25, amount: "300" },
+                    { caWeight: 30, amount: "350" },
+                    { caWeight: 35, amount: "390" },
+                    { caWeight: 40, amount: "430" },
+                    { caWeight: 45, amount: "470" },
+                    { caWeight: 50, amount: "510" },
+                    { caWeight: 55, amount: "550" },
+                    { caWeight: 60, amount: "590" },
+                    { caWeight: 70, amount: "670" },
+                    { caWeight: 80, amount: "760" },
+                  ]
+            }
+      ];

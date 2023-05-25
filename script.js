@@ -1,4 +1,4 @@
-// ********************************************************* Switch feeding profile
+// ********************************************************* Feeding profiles
 const profiles = [
   {
     kategori: "VALP",
@@ -9,11 +9,6 @@ const profiles = [
     amountColor: "#006f43",
     fontSize: "3em",
     caption: "Labb Valp hundefôr mellom- og store raser 15 kg",
-    amount: "foodAmount",
-    valph2: "block",
-    display: "block",
-    adulth2: "none",
-    displayA: "none"
   },
   {
     kategori: "VOKSEN",
@@ -24,11 +19,6 @@ const profiles = [
     amountColor: "#00538a",
     fontSize: "3em",
     caption: "Labb Voksen hundefôr mellom- og stor rase 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
   {
     kategori: "AKTIV",
@@ -39,11 +29,6 @@ const profiles = [
     amountColor: "#b51826",
     fontSize: "3em",
     caption: "Labb Aktiv hundefôr hunder alle størrelser 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
   {
     kategori: "EKSTREM ENERGI",
@@ -54,11 +39,6 @@ const profiles = [
     amountColor: "#02304f",
     fontSize: "2em",
     caption: "Labb Ekstrem Energi hundefôr hardtarbeidende hunder 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
   {
     kategori: "SENSITIV",
@@ -69,11 +49,6 @@ const profiles = [
     amountColor: "#a0715c",
     fontSize: "2.75em",
     caption: "Labb Sensitiv hundefôr mellom- og store hunder 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
   {
     kategori: "SENIOR",
@@ -84,11 +59,6 @@ const profiles = [
     amountColor: "#c84e2d",
     fontSize: "3em",
     caption: "Labb Senior hundefôr mellom- og store hunder 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
   {
     kategori: "VEKTKONTROLL",
@@ -99,11 +69,6 @@ const profiles = [
     amountColor: "#b41c69",
     fontSize: "1.5em",
     caption: "Labb Vektkontroll hundefôr mellom- og store hunder 15 kg",
-    amount: "foodAmountADULT",
-    valph2: "none",
-    display: "none",
-    adulth2: "block",
-    displayA: "block"
   },
 ];
 
@@ -119,21 +84,12 @@ function updateProfile() {
   cut.style.backgroundColor = profile.bgColor;
   cut2.style.backgroundColor = profile.bgColor;
   foodAmount.style.color = profile.amountColor;
-  foodAmountADULT.style.color = profile.amountColor;
   nav.style.fontSize = profile.fontSize;
   stort.dataset.caption = profile.caption;
   stort.href = profile.imgHref;
   lite.src = profile.imgSrc;
-  foodAmount.ID = profile.amount;
-  foodAmountADULT.ID = profile.amount;
-  valph2.style.display = profile.valph2;
-  foodAmount.style.display = profile.display;
-  adulth2.style.display = profile.adulth2;
-  foodAmountADULT.style.display = profile.displayA;
 
   // Reset other elements or values if needed
-  foodAmount.textContent = "";
-  foodAmountADULT.textContent = "";
   result.style.display = "none";
   age.value = "";
   weight.value = "";
@@ -418,6 +374,11 @@ document.getElementById('puppyForm').addEventListener('submit', function(event) 
 
   // Display the result on the webpage
   document.getElementById('result').style.display = 'block';
-  document.getElementById('foodAmount').textContent = `${foodAmount} gram pr. dag`;
-  document.getElementById('foodAmountADULT').textContent = `${foodAmountADULT} gram pr. dag`;
+
+  // Check the active profile and display the appropriate food amount
+  if (profiles[currentIndex].kategori === 'VALP') {
+    document.getElementById('foodAmount').textContent = `${foodAmount} gram pr. dag`;
+  } else if (profiles[currentIndex].kategori === 'VOKSEN' || profiles[currentIndex].kategori === 'SENIOR' || profiles[currentIndex].kategori === 'SENSITIV' || profiles[currentIndex].kategori === 'VEKTKONTROLL') {
+    document.getElementById('foodAmount').textContent = `${foodAmountADULT} gram pr. dag`;
+  }
 });
