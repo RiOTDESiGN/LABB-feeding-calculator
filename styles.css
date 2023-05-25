@@ -204,6 +204,23 @@ select {
     margin: auto 20px;
 }
 
+.runningdog {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 265px;
+    left: 25px;
+    width: 300px;
+    height: 100px;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.dogs {
+    width: 130px;
+}
+
 /* ******************************************************************* */
 
 .inputcontainer {

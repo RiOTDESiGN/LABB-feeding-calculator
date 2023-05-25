@@ -20,9 +20,9 @@
         <img src="left-arrow.png" id="left" alt="Left" class="arrow"><h3 id="kategori">VALP</h3><img src="right-arrow.png" id="right" alt="Right" class="arrow">
       </div>
       <div class="inputcontainer ic1">
-        <input type="number" id="age" name="age" required min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
+        <input type="number" id="age" name="age" min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
         <div id="cut" class="cut"></div>
-        <label for="age" class="placeholder">-- Alder (i måneder) --</label>
+        <label id="ageplaceholder" for="age" class="placeholder">-- Alder (i måneder) --</label>
       </div>
 
       <div class="replace ic2">
@@ -63,7 +63,7 @@
 
         </div>
     </div>
-
+    <div id="runningdog" class="runningdog"><img id="dogs" src="aktivdog.png" alt="running dogs" class="dogs"></div>
   </div>
 </body>
 </html>

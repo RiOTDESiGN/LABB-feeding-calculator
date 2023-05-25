@@ -14,7 +14,10 @@ const profiles = [
     high: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
-    age: "block"
+    age: "block",
+    ageplaceholder: "block",
+    dogs: "none",
+    zindex: "-3"
   },
   {
     kategori: "VOKSEN",
@@ -30,7 +33,11 @@ const profiles = [
     high: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "voksendog.png",
+    zindex: "3"
   },
   {
     kategori: "AKTIV",
@@ -46,7 +53,11 @@ const profiles = [
     high: "Hardt arbeid (3 – 6 timer)",
     font: "18px",
     fontpadding: "14px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "aktivdog.png",
+    zindex: "3"
   },
   {
     kategori: "EKSTREM ENERGI",
@@ -62,7 +73,11 @@ const profiles = [
     high: "Svært hardt arbeid, jakt, trening og løp (over 6 timer)",
     font: "12px",
     fontpadding: "17px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "ekstremdog.png",
+    zindex: "3"
   },
   {
     kategori: "SENSITIV",
@@ -78,7 +93,11 @@ const profiles = [
     high: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "valpdog.png",
+    zindex: "3"
   },
   {
     kategori: "SENIOR",
@@ -94,7 +113,11 @@ const profiles = [
     high: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "seniordog.png",
+    zindex: "3"
   },
   {
     kategori: "VEKTKONTROLL",
@@ -110,7 +133,11 @@ const profiles = [
     high: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
-    age: "none"
+    age: "none",
+    ageplaceholder: "none",
+    dogs: "block",
+    dog: "vektkontrolldog.png",
+    zindex: "3"
   },
 ];
 
@@ -137,6 +164,10 @@ function updateProfile() {
   activity.style.fontSize = profile.font;
   activity.style.padding = profile.fontpadding;
   age.style.display = profile.age;
+  ageplaceholder.style.display = profile.ageplaceholder;
+  dogs.style.display = profile.dogs;
+  dogs.src = profile.dog;
+  runningdog.style.zIndex = profile.zindex;
 
   result.style.display = "none";
   age.value = "";
