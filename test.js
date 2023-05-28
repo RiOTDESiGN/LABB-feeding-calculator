@@ -359,3 +359,193 @@ function calculateFoodAmount(age, weight, activity, kategori) {
                   ]
             }
       ];
+
+
+
+
+
+
+
+
+
+
+
+
+      if ( kategori === "VALP" ) {
+        const foodAmounts = [
+          {
+            kategori: "VALP",
+            ageRanges: [
+              {
+                ageRange: [1, 5],
+                weightRanges: [
+                  { min: 1, max: 3, amount: "70-125" },
+                  { min: 3, max: 5, amount: "135-195" },
+                  { min: 5, max: 8, amount: "195-280" },
+                  { min: 8, max: 11, amount: "280-350" },
+                  { min: 11, max: 15, amount: "350-440" },
+                  { min: 15, max: 20, amount: "440-550" },
+                  { min: 20, max: 25, amount: "550-650" }
+                ]
+              },
+              {
+                ageRange: [6, 8],
+                weightRanges: [
+                  { min: 5, max: 8, amount: "160-230" },
+                  { min: 8, max: 11, amount: "230-290" },
+                  { min: 11, max: 15, amount: "290-340" },
+                  { min: 15, max: 20, amount: "340-430" },
+                  { min: 20, max: 25, amount: "430-510" },
+                  { min: 25, max: 30, amount: "510-595" },
+                  { min: 35, max: 40, amount: "595-670" },
+                  { min: 40, max: 45, amount: "670-730" }
+                ]
+              },
+              {
+                ageRange: [9, 12],
+                weightRanges: [
+                  { min: 11, max: 15, amount: "235-340" },
+                  { min: 15, max: 20, amount: "340-405" },
+                  { min: 20, max: 25, amount: "405-470" },
+                  { min: 25, max: 30, amount: "470-530" },
+                  { min: 35, max: 40, amount: "530-590" },
+                  { min: 40, max: 45, amount: "590-650" },
+                  { min: 45, max: 50, amount: "650-705" },
+                  { min: 50, max: 60, amount: "705-790" },
+                  { min: 60, max: 70, amount: "790-880" },
+                  { min: 70, max: 80, amount: "880-970" }
+                ]
+              },
+              {
+                ageRange: [13, 16],
+                weightRanges: [
+                  { min: 15, max: 20, amount: "330-360" },
+                  { min: 20, max: 25, amount: "360-400" },
+                  { min: 25, max: 30, amount: "400-430" },
+                  { min: 35, max: 40, amount: "430-515" },
+                  { min: 40, max: 45, amount: "515-620" },
+                  { min: 45, max: 50, amount: "620-720" },
+                  { min: 50, max: 60, amount: "720-820" },
+                  { min: 60, max: 70, amount: "820-900" },
+                  { min: 70, max: 80, amount: "900-950" }
+                ]
+              }
+            ]
+          }
+      
+        ];
+      
+        const categoryObj = foodAmounts.find((item) => item.kategori === kategori);
+    
+        if (categoryObj) {
+          const { ageRanges } = categoryObj;
+      
+          for (const ageRangeObj of ageRanges) {
+            const { ageRange, weightRanges } = ageRangeObj;
+            const [minAge, maxAge] = ageRange;
+      
+            if (age >= minAge && age <= maxAge) {
+              for (const weightRangeObj of weightRanges) {
+                const { min, max, amount } = weightRangeObj;
+      
+                if (weight >= min && weight <= max) {
+                  foodAmount = amount;
+                  break;
+                }
+              }
+              break;
+            }
+          }
+        }
+      
+        if (foodAmount !== "") {
+          if (activity === "low") {
+            return foodAmount.toString().slice(0, 3);
+          } else if (activity === "high") {
+            return foodAmount.toString().slice(-3);
+          } else if (activity === "medium") {
+            const range = foodAmount.split("-");
+            const lowerValue = parseInt(range[0]);
+            const upperValue = parseInt(range[1]);
+            const average = (lowerValue + upperValue) / 2;
+            return average;
+          }
+        }
+    
+      }
+
+
+
+
+
+
+      <!-- <div class="selector">
+        <select id="age">
+            <option value="">-- Velg aldersnivå --</option>
+            <option id="1-5" value="1-5">1-5</option>
+            <option id="6-8" value="6-8">6-8</option>
+            <option id="9-12" value="9-12">9-12</option>
+            <option id="13-16" value="13-16">13-16</option>
+        </select>
+      </div> -->
+
+
+
+
+
+
+      {
+        kategori: "VALP",
+        bgColor: "#006f43",
+        border: "3px solid #006f43",
+        imgSrc: "valp.png",
+        imgHref: "valp.webp",
+        amountColor: "#006f43",
+        fontSize: "3em",
+        caption: "Labb Valp hundefôr mellom- og store raser 15 kg",
+        medium: "block",
+        low: "Lavt",
+        high: "Høyt",
+        font: "18px",
+        fontpadding: "14px 0",
+        age: "block",
+        ageplaceholder: "block",
+        dogs: "none",
+        zindex: "-3"
+      },
+
+
+
+      function cutColor() {
+
+        const input = document.querySelector('.input');
+        const placeholder = document.querySelector('.placeholder');
+        
+        input.addEventListener('focus', () => {
+          placeholder.style.color = '#000';
+        });
+    
+        input.addEventListener('blur', () => {
+          placeholder.style.color = '#000';
+        });
+        }
+    
+      function cutColorEE() {
+    
+        const input = document.querySelector('.input');
+        const placeholder = document.querySelector('.placeholder');
+        
+        input.addEventListener('focus', () => {
+          placeholder.style.color = '#dad4c7';
+        });
+    
+        input.addEventListener('blur', () => {
+          placeholder.style.color = '#000';
+        });
+        }
+    
+      if (profile.kategori === 'EKSTREM ENERGI') {
+        cutColorEE();
+      } else {
+        cutColor();
+      }

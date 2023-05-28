@@ -3,11 +3,14 @@
     src: url('Ultramagnetic Bold.ttf')  format('truetype')
   }
 
+:root {
+    font-size: 16px;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border: 0;
     outline: 0;
 }
 
@@ -42,6 +45,7 @@ h3 {
     font-family: Ultramagnetic-Bold, sans-serif;
     font-size: 1em;
     line-height: 1em;
+    font-size: clamp(0.5em, 12.5vw, 1em);
 }
 
 .nav {
@@ -50,11 +54,12 @@ h3 {
     justify-content: space-between;
     height: 80px;
     width: 100%;
-    font-size: 3em;
 }
 
 .arrow {
-    width: 60px;
+    width: 20%;
+    margin: 0 auto;
+    object-fit: cover;
     opacity: 0.3;
 }
 
@@ -71,8 +76,8 @@ form {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #006f43;
-    border: 3px solid #006f43;
+    background-color: #00538a;
+    border: 3px solid #00538a;
     padding: 20px;
     gap: 20px;
     border-radius: 16px;
@@ -92,7 +97,7 @@ button {
     position: relative;
     border: 0;
     border-radius: 10px;
-    margin: 0 auto;
+    margin: 12px auto 0 auto;
 }
   
 button::before,
@@ -170,7 +175,9 @@ select {
     position: relative;
 }
 
-.activity {
+.selector {
+    display: flex;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -185,7 +192,7 @@ select {
 .amount {
     font-weight: bold;
     font-size: 20px;
-    color: #006f43;
+    color: #00538a;
 }
 
 .FK-container {
@@ -204,21 +211,18 @@ select {
     margin: auto 20px;
 }
 
-.runningdog {
-    position: absolute;
+.dogs {
     display: flex;
     align-items: center;
     justify-content: center;
-    top: 265px;
-    left: 25px;
-    width: 300px;
-    height: 100px;
-    z-index: 3;
-    overflow: hidden;
+    width: 100%;
+    height: 120px;
 }
 
-.dogs {
-    width: 130px;
+.dog {
+    width: 100%;
+    padding: 0 25%;
+    object-fit: cover;
 }
 
 /* ******************************************************************* */
@@ -227,14 +231,6 @@ select {
     height: 50px;
     width: 100%;
     position: relative;
-}
-  
-.ic1 {
-    margin-top: 0px;
-}
-  
-.ic2 {
-    margin-top: 4px;
 }
   
 .input {
@@ -262,46 +258,33 @@ input[type=number] {
 }
 
 .cut {
-    background-color: #006f43;
+    background-color: #00538a;
     border-radius: 10px;
     height: 20px;
     position: absolute;
     top: -20px;
     transform: translateY(0);
     transition: transform 200ms;
-    width: 62%;
-    margin: 0 19%;
-}
-
-.cut-voksen {
-    background-color: #00538a;
-}
-
-.cut2 {
     width: 45%;
     margin: 0 27.5%;
-}
-
-.cut-short {
-    width: 50px;
 }
   
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
-    transform: translateY(8px);
+    transform: translateY(8.5px);
 }
   
 .placeholder {
     left: 0;
     right: 0;
-    color: rgb(0, 0, 0);
+    color: #000;
     line-height: 14px;
     font-size: 18px;
     pointer-events: none;
     position: absolute;
     transform-origin: 0 50%;
     transition: transform 200ms, color 200ms;
-    top: 20px;
+    top: 18px;
 }
   
 .input:focus ~ .placeholder,
@@ -314,7 +297,7 @@ input[type=number] {
 }
   
 .input:focus ~ .placeholder {
-    color: #ff7d7d;
+    color: #dad4c7;
 }
 
 /* ************************************************************ */

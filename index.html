@@ -15,23 +15,20 @@
     <h1>H U N D</h1>
     </div>
     <div class="nocorners">
-    <form id="puppyForm" class="valp">
+    <form id="puppyForm">
       <div id="nav" class="nav">
         <img src="left-arrow.png" id="left" alt="Left" class="arrow"><h3 id="kategori">VALP</h3><img src="right-arrow.png" id="right" alt="Right" class="arrow">
       </div>
-      <div class="inputcontainer ic1">
-        <input type="number" id="age" name="age" min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
-        <div id="cut" class="cut"></div>
-        <label id="ageplaceholder" for="age" class="placeholder">-- Alder (i måneder) --</label>
-      </div>
 
-      <div class="replace ic2">
+      <!-- <div id="dogs" class="dogs"><img id="dog" src="aktivdog.png" alt="running dogs" class="dog"></div> -->
+
+      <div class="replace">
         <input type="number" id="weight" name="weight" required min="1" max="80" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
-        <div id="cut2" class="cut cut2"></div>
-        <label for="weight" class="placeholder">-- Vekt (i kilo) --</label>
+        <div id="cut" class="cut"></div>
+        <label id="weightplaceholder" for="weight" class="placeholder">-- Skriv inn vekt --</label>
       </div>
 
-      <div class="activity">
+      <div class="selector">
         <label for="activity"><h2>Aktivitetsnivå:</h2></label>
         <select id="activity">
             <option value="">-- Velg aktivitetsnivå --</option>
@@ -63,7 +60,7 @@
 
         </div>
     </div>
-    <div id="runningdog" class="runningdog"><img id="dogs" src="aktivdog.png" alt="running dogs" class="dogs"></div>
+    
   </div>
 </body>
 </html>
