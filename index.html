@@ -29,9 +29,9 @@
           <label for="activity"><h2>Aktivitetsnivå:</h2></label>
           <select id="activity">
               <option value="">-- Velg aktivitetsnivå --</option>
-              <option id="low" value="low">Lavt</option>
-              <option id="medium" value="medium">Middels</option>
-              <option id="high" value="high">Høyt</option>
+              <option id="lavt" value="lavt">Lavt</option>
+              <option id="middels" value="middels">Middels</option>
+              <option id="høyt" value="høyt">Høyt</option>
           </select>
         </div>
         <button type="submit" class="button-hover">Regn ut</button>
@@ -50,16 +50,12 @@
           <img src="FK.svg" alt="Felleskjøpet logo" class="FK">
           </a>
       </div>
+      <div id="historikk-container" class="historikk-container">
+        <h2>Historikk over fôringsmengde:</h2>
+        <div id="history" class="entries">Det ser ikke ut til at du har brukt appen vår enda. Dine 10 siste søk vil være lagret her til du tømmer listen ved å trykke på reset-knappen.</div>
+        <div class="align"><a href="#" id="reset" class="reset">reset</a></div>
+      </div>
     </div>
-    <nav id="nav">
-      <button class="nav-icon" id="nav-icon"><span></span></button>
-      <ul>
-        <li><div class="tooltip"><a href="#" class="historikk align">H
-          <span id="history" class="tooltiptext">Historikk over fôringsmengde.<br>Det ser ikke ut til at du har brukt appen vår enda. Dine 10 siste søk vil være lagret her til du tømmer listen ved å trykke på reset-knappen.</span>
-        </a></div></li>
-        <li><a href="#" id="reset" class="reset align">reset</a></li>
-      </ul>
-    </nav>
   </div>
 </body>
 </html>

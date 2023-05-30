@@ -184,7 +184,7 @@ select {
 }
 
 .border-container {
-    height: 100vh;
+    height: 100%;
     border-left: 14px solid #dad4c7;
     border-right: 14px solid #dad4c7;
     padding: 10px 0 24px 0;
@@ -246,155 +246,71 @@ select {
     object-fit: cover;
 }
 
-nav ul {
-    position: absolute;
-    top: 35px;
-    right: 4.5%;
-    visibility: hidden;
-    pointer-events: none;
-    list-style: none;
-    width: 32px;
-    z-index: 69;
-}
-nav ul li {
-    padding: 0.5em 0;
-
-    cursor: default;
-    border-radius: 20px;
-}
-nav.active ul {
-    visibility: visible;
-    pointer-events: initial;
-    opacity: 1;
-    animation-name: fadeInOpacity;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-duration: 0.5s;
-    transition-property: visibility, opacity;
-    transition-duration: 0.5s;
-    transition-timing-function: linear;
-}
-nav:not(.active) ul {
-    visibility: visible;
-    pointer-events: none;
-    transition-delay: 0.5s;
-    opacity: 0;
-    animation-name: fadeOutOpacity;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fadeOutOpacity {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-.nav-icon {
-    -webkit-appearance: none;
-        -moz-appearance: none;
-            appearance: none;
-    background: transparent;
-    cursor: pointer;
-    display: inline-block;
-    height: 35px;
-    width: 35px;
-    position: absolute;
-    top: -14px;
-    right: 5%;
-    border: 0;
-    z-index: 69;
-}
-.nav-icon span {
-    position: absolute;
-    top: 25px;
-    right: 15px;
-    background-color: #ffffff;
-    display: block;
-    height: 3px;
-    left: 15px;
-    transition: transform 0.5s;
-}
-.nav-icon span:before, .nav-icon span:after {
-    width: 100%;
-    height: 3px;
-    background-color: inherit;
-    content: "";
-    display: block;
-    left: 0;
-    position: absolute;
-}
-.nav-icon span:before {
-    top: -8px;
-}
-.nav-icon span:after {
-    bottom: -8px;
-}
-.active .nav-icon span {
-    transform: rotate(90deg);
-}
-
 .reset {
+    margin-top: 20px;
     background-color: var(--stop-reset);
     color: var(--t);
     padding: 10px 0;
     height: auto;
     width: 25.5px;
-    border: 1px solid #000;
-    border-radius: 10px;
-    -ms-writing-mode: tb-lr;
-    writing-mode: vertical-lr;
-    text-orientation: upright;
-}
-
-.historikk {
-    background-color: #dad4c7;
-    color: #000;
-    padding: 10px 0;
-    height: auto;
-    width: 25.5px;
+    width: 100px;
     border: 1px solid #000;
     border-radius: 10px;
 }
 
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-block;
-  }
-  
-  /* Tooltip text */
-  .tooltip .tooltiptext {
+.historikk-container {
     visibility: hidden;
-    width: 500px;
-    height: auto;
-    background-color: black;
-    color: #fff;
+}
+
+.timestamp {
+    text-align: right;
+    font-style: italic;
+}
+
+.entries {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     text-align: left;
-    font-size: 14px;
+    margin: 0 16px;
+    font-size: 12px;
+}
+
+.voksen {
+    background-color: #00538a;
     padding: 10px;
-    border-radius: 6px;
-    position: absolute;
-    top: 140px;
-    right: 0px;
-    z-index: 1;
-  }
-  
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+    border-radius: 10px;
+}
+
+.aktiv {
+    background-color: #b51826;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.ekstrem-energi {
+    background-color: #02304f;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.sensitiv {
+    background-color: #a0715c;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.senior {
+    background-color: #c84e2d;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.vektkontroll {
+    background-color: #b41c69;
+    padding: 10px;
+    border-radius: 10px;
+}
 
 /* ******************************************************************* */
 

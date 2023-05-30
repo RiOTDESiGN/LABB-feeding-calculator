@@ -1,3 +1,13 @@
+// Check if the website has been loaded before
+if (!localStorage.getItem('firstLoad')) {
+  // Code to run only the first time the webpage is loaded
+  document.getElementById('historikk-container').style.visibility = 'visible';
+
+  // Set a flag in localStorage to indicate that the website has been loaded
+  localStorage.setItem('firstLoad', 'true');
+}
+
+
 //  Feeding profiles
 const profiles = [
   {
@@ -9,9 +19,9 @@ const profiles = [
     imgHref: "voksen.webp",
     amountColor: "#00538a",
     caption: "Labb Voksen hundefôr mellom- og stor rase 15 kg",
-    medium: "block",
-    low: "Lavt",
-    high: "Høyt",
+    middels: "block",
+    lavt: "Lavt",
+    høyt: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
     dog: "voksendog.png",
@@ -28,9 +38,9 @@ const profiles = [
     imgHref: "aktiv.webp",
     amountColor: "#b51826",
     caption: "Labb Aktiv hundefôr hunder alle størrelser 15 kg",
-    medium: "none",
-    low: "Moderat aktivitet (1 – 3 timer)",
-    high: "Hardt arbeid (3 – 6 timer)",
+    middels: "none",
+    lavt: "Moderat aktivitet (1 – 3 timer)",
+    høyt: "Hardt arbeid (3 – 6 timer)",
     font: "18px",
     fontpadding: "14px 0",
     dog: "aktivdog.png",
@@ -47,9 +57,9 @@ const profiles = [
     imgHref: "ekstrem.webp",
     amountColor: "#02304f",
     caption: "Labb Ekstrem Energi hundefôr hardtarbeidende hunder 15 kg",
-    medium: "none",
-    low: "Hardt arbeid, jakt, trening og løp (3 – 6 timer)",
-    high: "Svært hardt arbeid, jakt, trening og løp (over 6 timer)",
+    middels: "none",
+    lavt: "Hardt arbeid, jakt, trening og løp (3 – 6 timer)",
+    høyt: "Svært hardt arbeid, jakt, trening og løp (over 6 timer)",
     font: "12px",
     fontpadding: "17px 0",
     dog: "ekstremdog.png",
@@ -66,9 +76,9 @@ const profiles = [
     imgHref: "sensitiv.webp",
     amountColor: "#a0715c",
     caption: "Labb Sensitiv hundefôr mellom- og store hunder 15 kg",
-    medium: "block",
-    low: "Lavt",
-    high: "Høyt",
+    middels: "block",
+    lavt: "Lavt",
+    høyt: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
     dog: "valpdog.png",
@@ -85,9 +95,9 @@ const profiles = [
     imgHref: "senior.webp",
     amountColor: "#c84e2d",
     caption: "Labb Senior hundefôr mellom- og store hunder 15 kg",
-    medium: "block",
-    low: "Lavt",
-    high: "Høyt",
+    middels: "block",
+    lavt: "Lavt",
+    høyt: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
     dog: "seniordog.png",
@@ -104,9 +114,9 @@ const profiles = [
     imgHref: "vektkontroll.webp",
     amountColor: "#b41c69",
     caption: "Labb Vektkontroll hundefôr mellom- og store hunder 15 kg",
-    medium: "block",
-    low: "Lavt",
-    high: "Høyt",
+    middels: "block",
+    lavt: "Lavt",
+    høyt: "Høyt",
     font: "18px",
     fontpadding: "14px 0",
     dog: "vektkontrolldog.png",
@@ -138,9 +148,9 @@ navIconSpanElements.forEach(element => {
   stort.dataset.caption = profile.caption;
   stort.href = profile.imgHref;
   lite.src = profile.imgSrc;
-  medium.style.display = profile.medium;
-  low.textContent = profile.low;
-  high.textContent = profile.high;
+  middels.style.display = profile.middels;
+  lavt.textContent = profile.lavt;
+  høyt.textContent = profile.høyt;
   activity.style.fontSize = profile.font;
   activity.style.padding = profile.fontpadding;
   weight.min = profile.min;
@@ -274,9 +284,9 @@ function calculateFoodAmount(weight, activity, kategori) {
   
     const foodAmountNumeric = parseFloat(foodAmount);
 
-    if (activity === "low") {
+    if (activity === "lavt") {
       foodAmount = foodAmountNumeric - (foodAmountNumeric * 0.2);
-    } else if (activity === "high") {
+    } else if (activity === "høyt") {
       foodAmount = foodAmountNumeric + (foodAmountNumeric * 0.2);
     }
 
@@ -348,7 +358,7 @@ function calculateFoodAmount(weight, activity, kategori) {
       const selectedWeightRange = weightRanges.find(item => item.weight === closestWeight);
     
       if (selectedWeightRange) {
-        foodAmount = activity === "high" ? selectedWeightRange.amountH : selectedWeightRange.amountL;
+        foodAmount = activity === "høyt" ? selectedWeightRange.amountH : selectedWeightRange.amountL;
       }
     }
     
@@ -391,29 +401,12 @@ document.getElementById('puppyForm').addEventListener('submit', function(event) 
 
   // Add result to history
   storeResult();
+
+  // Show history
+  document.getElementById('historikk-container').style.visibility = 'visible';
 });
 
 updateProfile();
-
-// NAV BURGER
-
-var nav = document.getElementById('nav');
-var navlinks = nav.getElementsByTagName('a');
-
-function toggleNav() {
-    (nav.classList.contains('active')) ? nav.classList.remove('active') : nav.classList.add('active');
-  }
-
-document.getElementById('nav-icon').addEventListener('click', function(e) {
-    e.preventDefault();
-    toggleNav();
-});
-
-for(var i = 0; i < navlinks.length; i++) {
-  navlinks[i].addEventListener('click', function() {
-    toggleNav();
-});
-}
 
 
 // History Local Storage
@@ -449,31 +442,58 @@ function storeResult() {
 }
 
 function updateHistory() {
-  var historySpan = document.getElementById("history");
-  historySpan.innerHTML = "";
-
+  var historyDiv = document.getElementById("history");
+  historyDiv.textContent = "";
 
   if (historyList.length === 0) {
-    var defaultText = document.createElement("span");
-    defaultText.textContent = "Ingen historikk tilgjengelig. Bruk appen for å se dine siste 10 resultater her.";
-    historySpan.appendChild(defaultText);
+    var defaultText = document.createElement("p");
+    var defaultText2 = document.createElement("p");
+    defaultText.textContent = "Ingen historikk tilgjengelig.";
+    defaultText2.textContent = "Bruk appen for å se dine siste 10 resultater her.";
+    historyDiv.appendChild(defaultText);
+    historyDiv.appendChild(defaultText2);
   } else {
-  for (var i = 0; i < historyList.length; i++) {
-    var entry = historyList[i];
-    var entryDiv = document.createElement("div");
-    var resultSpan = document.createElement("span");
-    
-    // Format the timestamp in 24-hour format
-    var timestamp = new Date(entry.timestamp).toLocaleString(undefined, {
-      hour12: false
-    });
+    for (var i = 0; i < historyList.length; i++) {
+      var entry = historyList[i];
+      var entryDiv = document.createElement("div");
+      var resultP = document.createElement("p");
+      var resultPtimeStamp = document.createElement("p");
 
-    resultSpan.textContent = "Kategori: " + entry.profile + ". " + "Hundens vekt: " + entry.weight + " kg. " + "Aktivitetsnivå: " + entry.activity + ". " + "Anbefalt mengde: " + entry.result + ". Dato: " + timestamp;
-    entryDiv.appendChild(resultSpan);
-    historySpan.appendChild(entryDiv);
+      var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
+      var timestamp = new Date(entry.timestamp).toLocaleString('no-NO', options);
+
+      // Create separate text nodes for each part of the text
+      var categoryText = document.createTextNode("Kategori: " + entry.profile + ". ");
+      var weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg. ");
+      var activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity + ". ");
+      var resultText = document.createTextNode("Anbefalt mengde: " + entry.result + ". ");
+      var dateText = document.createTextNode("Dato: " + timestamp);
+
+      // Append the text nodes with line breaks in between
+      resultPtimeStamp.className = "timestamp";
+      resultPtimeStamp.appendChild(dateText);
+      resultPtimeStamp.appendChild(document.createElement("br"));
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(categoryText);
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(weightText);
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(activityText);
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(resultText);
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(document.createElement("br"));
+      resultP.appendChild(document.createElement("hr"));
+
+      entryDiv.classList.add(entry.profile.toLowerCase().replace(/ /g, '-'));
+
+      entryDiv.appendChild(resultPtimeStamp);
+      entryDiv.appendChild(resultP);
+      historyDiv.appendChild(entryDiv);
+    }
   }
 }
-}
+
 
 function clearHistory() {
   historyList = []; // Empty the history list
@@ -484,6 +504,8 @@ function clearHistory() {
 const reset = document.getElementById("reset");
 reset.addEventListener("mousedown", function(event) {
   event.preventDefault(); // Prevent the default link behavior
-
+  result.style.display = "none";
+  weight.value = "";
+  activity.value = "";
   clearHistory(); // Clear the history list
 });
