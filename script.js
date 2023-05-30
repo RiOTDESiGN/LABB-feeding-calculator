@@ -2,12 +2,12 @@
 const profiles = [
   {
     kategori: "VOKSEN",
+    kategoriSize: "clamp(1em, 12vw, 2.85em)",
     bgColor: "#00538a",
     border: "3px solid #00538a",
     imgSrc: "voksen.png",
     imgHref: "voksen.webp",
     amountColor: "#00538a",
-    fontSize: "3em",
     caption: "Labb Voksen hundefôr mellom- og stor rase 15 kg",
     medium: "block",
     low: "Lavt",
@@ -15,15 +15,18 @@ const profiles = [
     font: "18px",
     fontpadding: "14px 0",
     dog: "voksendog.png",
+    min: "15",
+    max: "80",
+    navColor: "#00538a"
   },
   {
     kategori: "AKTIV",
+    kategoriSize: "clamp(1em, 12vw, 2.85em)",
     bgColor: "#b51826",
     border: "3px solid #b51826",
     imgSrc: "aktiv.png",
     imgHref: "aktiv.webp",
     amountColor: "#b51826",
-    fontSize: "3em",
     caption: "Labb Aktiv hundefôr hunder alle størrelser 15 kg",
     medium: "none",
     low: "Moderat aktivitet (1 – 3 timer)",
@@ -31,15 +34,18 @@ const profiles = [
     font: "18px",
     fontpadding: "14px 0",
     dog: "aktivdog.png",
+    min: "8",
+    max: "90",
+    navColor: "#b51826"
   },
   {
     kategori: "EKSTREM ENERGI",
+    kategoriSize: "clamp(0.5em, 10vw, 2.3em)",
     bgColor: "#02304f",
     border: "3px solid #02304f",
     imgSrc: "ekstrem.png",
     imgHref: "ekstrem.webp",
     amountColor: "#02304f",
-    fontSize: "2em",
     caption: "Labb Ekstrem Energi hundefôr hardtarbeidende hunder 15 kg",
     medium: "none",
     low: "Hardt arbeid, jakt, trening og løp (3 – 6 timer)",
@@ -47,15 +53,18 @@ const profiles = [
     font: "12px",
     fontpadding: "17px 0",
     dog: "ekstremdog.png",
+    min: "8",
+    max: "60",
+    navColor: "#02304f"
   },
   {
     kategori: "SENSITIV",
+    kategoriSize: "clamp(0.5em, 10vw, 2.5em)",
     bgColor: "#a0715c",
     border: "3px solid #a0715c",
     imgSrc: "sensitiv.png",
     imgHref: "sensitiv.webp",
     amountColor: "#a0715c",
-    fontSize: "2.75em",
     caption: "Labb Sensitiv hundefôr mellom- og store hunder 15 kg",
     medium: "block",
     low: "Lavt",
@@ -63,15 +72,18 @@ const profiles = [
     font: "18px",
     fontpadding: "14px 0",
     dog: "valpdog.png",
+    min: "15",
+    max: "80",
+    navColor: "#a0715c"
   },
   {
     kategori: "SENIOR",
+    kategoriSize: "clamp(1em, 12vw, 2.85em)",
     bgColor: "#c84e2d",
     border: "3px solid #c84e2d",
     imgSrc: "senior.png",
     imgHref: "senior.webp",
     amountColor: "#c84e2d",
-    fontSize: "3em",
     caption: "Labb Senior hundefôr mellom- og store hunder 15 kg",
     medium: "block",
     low: "Lavt",
@@ -79,15 +91,18 @@ const profiles = [
     font: "18px",
     fontpadding: "14px 0",
     dog: "seniordog.png",
+    min: "15",
+    max: "90",
+    navColor: "#c84e2d"
   },
   {
     kategori: "VEKTKONTROLL",
+    kategoriSize: "clamp(0.8em, 6vw, 1.45em)",
     bgColor: "#b41c69",
     border: "3px solid #b41c69",
     imgSrc: "vektkontroll.png",
     imgHref: "vektkontroll.webp",
     amountColor: "#b41c69",
-    fontSize: "1.5em",
     caption: "Labb Vektkontroll hundefôr mellom- og store hunder 15 kg",
     medium: "block",
     low: "Lavt",
@@ -95,6 +110,9 @@ const profiles = [
     font: "18px",
     fontpadding: "14px 0",
     dog: "vektkontrolldog.png",
+    min: "15",
+    max: "90",
+    navColor: "#b41c69"
   },
 ];
 
@@ -104,13 +122,19 @@ let currentIndex = 0;
 //  Profile Updater
 function updateProfile() {
   const profile = profiles[currentIndex];
+  const navIconSpanElements = document.querySelectorAll('.nav-icon span');
 
+navIconSpanElements.forEach(element => {
+  element.style.backgroundColor = profile.navColor;
+});
+
+  document.querySelectorAll('.nav-icon span').backgroundColor = profile.navColor;
+  navi.style.fontSize = profile.kategoriSize;
   kategori.textContent = profile.kategori;
   puppyForm.style.backgroundColor = profile.bgColor;
   puppyForm.style.border = profile.border;
   cut.style.backgroundColor = profile.bgColor;
   foodAmount.style.color = profile.amountColor;
-  nav.style.fontSize = profile.fontSize;
   stort.dataset.caption = profile.caption;
   stort.href = profile.imgHref;
   lite.src = profile.imgSrc;
@@ -119,6 +143,8 @@ function updateProfile() {
   high.textContent = profile.high;
   activity.style.fontSize = profile.font;
   activity.style.padding = profile.fontpadding;
+  weight.min = profile.min;
+  weight.max = profile.max;
   // dog.src = profile.dog;
 
   result.style.display = "none";
@@ -142,7 +168,6 @@ function calculateFoodAmount(weight, activity, kategori) {
   let foodAmount = "";
 
   if ( kategori === "VOKSEN" || kategori === "SENIOR" || kategori === "SENSITIV" || kategori === "VEKTKONTROLL") {
-    let foodAmountADULT = null;
 
     const foodAmountsADULT = [
       {
@@ -223,23 +248,23 @@ function calculateFoodAmount(weight, activity, kategori) {
       const { weightRanges } = categoryObj;
   
       weightRanges.sort((a, b) => a.caWeight - b.caWeight);
-  
+
       for (let i = 0; i < weightRanges.length; i++) {
         const weightRangeObj = weightRanges[i];
         const { caWeight, amount } = weightRangeObj;
   
         if (caWeight >= weight) {
           if (i === 0) {
-            foodAmountADULT = weightRanges[0].amount;
+            foodAmount = weightRanges[0].amount;
           } else {
             const prevWeightRange = weightRanges[i - 1];
             const prevWeight = prevWeightRange.caWeight;
             const diffCurrent = Math.abs(caWeight - weight);
             const diffPrev = Math.abs(prevWeight - weight);
             if (diffCurrent < diffPrev) {
-              foodAmountADULT = amount;
+              foodAmount = amount;
             } else {
-              foodAmountADULT = prevWeightRange.amount;
+              foodAmount = prevWeightRange.amount;
             }
           }
           break;
@@ -247,17 +272,15 @@ function calculateFoodAmount(weight, activity, kategori) {
       }
     }
   
-    if (foodAmountADULT !== null) {
-      const foodAmountNumeric = parseFloat(foodAmountADULT);
-  
-      if (activity === "low") {
-        foodAmountADULT = foodAmountNumeric - (foodAmountNumeric * 0.2);
-      } else if (activity === "high") {
-        foodAmountADULT = foodAmountNumeric + (foodAmountNumeric * 0.2);
-      }
-  
-      return foodAmountADULT;
+    const foodAmountNumeric = parseFloat(foodAmount);
+
+    if (activity === "low") {
+      foodAmount = foodAmountNumeric - (foodAmountNumeric * 0.2);
+    } else if (activity === "high") {
+      foodAmount = foodAmountNumeric + (foodAmountNumeric * 0.2);
     }
+
+  return foodAmount;
   
   } else {
     const foodAmountsENERGY = [
@@ -300,21 +323,37 @@ function calculateFoodAmount(weight, activity, kategori) {
       },
     ];
   
+    function roundToClosestWeight(weight, weightRanges) {
+      let closestWeight = weightRanges[0].weight;
+      let minDifference = Math.abs(weight - closestWeight);
+    
+      for (let i = 1; i < weightRanges.length; i++) {
+        const currentWeight = weightRanges[i].weight;
+        const difference = Math.abs(weight - currentWeight);
+    
+        if (difference < minDifference) {
+          closestWeight = currentWeight;
+          minDifference = difference;
+        }
+      }
+    
+      return closestWeight;
+    }
+    
     const categoryObj = foodAmountsENERGY.find(item => item.kategori === kategori);
-
+    
     if (categoryObj) {
       const { weightRanges } = categoryObj;
-      const selectedWeightRange = weightRanges.find(item => item.weight === weight);
-  
+      const closestWeight = roundToClosestWeight(weight, weightRanges);
+      const selectedWeightRange = weightRanges.find(item => item.weight === closestWeight);
+    
       if (selectedWeightRange) {
         foodAmount = activity === "high" ? selectedWeightRange.amountH : selectedWeightRange.amountL;
       }
     }
-  
+    
     return foodAmount;
   }
-
-  return "N/A";
 }
 
 
@@ -349,6 +388,102 @@ document.getElementById('puppyForm').addEventListener('submit', function(event) 
 
   // Display the appropriate food amount
   document.getElementById('foodAmount').textContent = `${foodAmount} gram pr. dag`;
+
+  // Add result to history
+  storeResult();
 });
 
 updateProfile();
+
+// NAV BURGER
+
+var nav = document.getElementById('nav');
+var navlinks = nav.getElementsByTagName('a');
+
+function toggleNav() {
+    (nav.classList.contains('active')) ? nav.classList.remove('active') : nav.classList.add('active');
+  }
+
+document.getElementById('nav-icon').addEventListener('click', function(e) {
+    e.preventDefault();
+    toggleNav();
+});
+
+for(var i = 0; i < navlinks.length; i++) {
+  navlinks[i].addEventListener('click', function() {
+    toggleNav();
+});
+}
+
+
+// History Local Storage
+var historyList = [];
+
+// Load history from localStorage if available
+if (localStorage.getItem("historyList")) {
+  historyList = JSON.parse(localStorage.getItem("historyList"));
+  updateHistory();
+}
+
+function storeResult() {
+  var profile = profiles[currentIndex].kategori;
+  var weight = document.getElementById('weight').value;
+  var activity = document.getElementById('activity').value;
+  var result = document.getElementById('foodAmount').textContent;
+  var timestamp = new Date().toLocaleString();
+  var entry = {
+    profile: profile,
+    weight: weight,
+    activity: activity,
+    result: result,
+    timestamp: timestamp
+  };
+
+  historyList.unshift(entry); // Add the new entry to the beginning of the array
+  historyList = historyList.slice(0, 10); // Keep only the latest 10 entries
+
+  // Save updated history to localStorage
+  localStorage.setItem("historyList", JSON.stringify(historyList));
+
+  updateHistory();
+}
+
+function updateHistory() {
+  var historySpan = document.getElementById("history");
+  historySpan.innerHTML = "";
+
+
+  if (historyList.length === 0) {
+    var defaultText = document.createElement("span");
+    defaultText.textContent = "Ingen historikk tilgjengelig. Bruk appen for å se dine siste 10 resultater her.";
+    historySpan.appendChild(defaultText);
+  } else {
+  for (var i = 0; i < historyList.length; i++) {
+    var entry = historyList[i];
+    var entryDiv = document.createElement("div");
+    var resultSpan = document.createElement("span");
+    
+    // Format the timestamp in 24-hour format
+    var timestamp = new Date(entry.timestamp).toLocaleString(undefined, {
+      hour12: false
+    });
+
+    resultSpan.textContent = "Kategori: " + entry.profile + ". " + "Hundens vekt: " + entry.weight + " kg. " + "Aktivitetsnivå: " + entry.activity + ". " + "Anbefalt mengde: " + entry.result + ". Dato: " + timestamp;
+    entryDiv.appendChild(resultSpan);
+    historySpan.appendChild(entryDiv);
+  }
+}
+}
+
+function clearHistory() {
+  historyList = []; // Empty the history list
+  localStorage.removeItem("historyList"); // Remove the history list from local storage
+  updateHistory(); // Update the displayed history
+}
+
+const reset = document.getElementById("reset");
+reset.addEventListener("mousedown", function(event) {
+  event.preventDefault(); // Prevent the default link behavior
+
+  clearHistory(); // Clear the history list
+});
