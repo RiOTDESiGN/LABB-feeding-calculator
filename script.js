@@ -1,10 +1,7 @@
 // Check if the website has been loaded before
-if (!localStorage.getItem('firstLoad')) {
+if (localStorage.getItem('historyList')) {
   // Code to run only the first time the webpage is loaded
   document.getElementById('historikk-container').style.visibility = 'visible';
-
-  // Set a flag in localStorage to indicate that the website has been loaded
-  localStorage.setItem('firstLoad', 'true');
 }
 
 
@@ -423,7 +420,8 @@ function storeResult() {
   var weight = document.getElementById('weight').value;
   var activity = document.getElementById('activity').value;
   var result = document.getElementById('foodAmount').textContent;
-  var timestamp = new Date().toLocaleString();
+  var timestamp = new Date().toLocaleDateString();
+
   var entry = {
     profile: profile,
     weight: weight,
@@ -456,38 +454,45 @@ function updateHistory() {
     for (var i = 0; i < historyList.length; i++) {
       var entry = historyList[i];
       var entryDiv = document.createElement("div");
-      var resultP = document.createElement("p");
-      var resultPtimeStamp = document.createElement("p");
+      var resultPweight = document.createElement("p");
+      var resultPactivity = document.createElement("p");
+      var resultPresult = document.createElement("p");
+      var resultPspacer = document.createElement("p");
+      var resultP = document.createElement("div");
+      var resultPtimeStamp = document.createElement("div");
+      var categorySpan = document.createElement("span");
+      var timestampSpan = document.createElement("span");
 
-      var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
-      var timestamp = new Date(entry.timestamp).toLocaleString('no-NO', options);
+      var options = { year: 'numeric', month: 'long', day: 'numeric'};
+      var timestamp = new Date(entry.timestamp).toLocaleDateString('no-NO', options);
 
       // Create separate text nodes for each part of the text
-      var categoryText = document.createTextNode("Kategori: " + entry.profile + ". ");
-      var weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg. ");
-      var activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity + ". ");
-      var resultText = document.createTextNode("Anbefalt mengde: " + entry.result + ". ");
-      var dateText = document.createTextNode("Dato: " + timestamp);
+      var categoryText = document.createTextNode(entry.profile);
+      var weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
+      var activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
+      var resultText = document.createTextNode("Mengde: " + entry.result);
+      var dateText = document.createTextNode(timestamp);
 
-      // Append the text nodes with line breaks in between
+      // Append text nodes
       resultPtimeStamp.className = "timestamp";
-      resultPtimeStamp.appendChild(dateText);
-      resultPtimeStamp.appendChild(document.createElement("br"));
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(categoryText);
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(weightText);
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(activityText);
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(resultText);
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(document.createElement("br"));
-      resultP.appendChild(document.createElement("hr"));
+      categorySpan.appendChild(categoryText);
+      timestampSpan.appendChild(dateText);
+      resultPweight.appendChild(document.createElement("br"));
+      resultPweight.appendChild(weightText);
+      resultPactivity.appendChild(activityText);
+      resultPresult.appendChild(resultText);
+      resultPspacer.appendChild(document.createElement("br"));
+      resultPspacer.appendChild(document.createElement("hr"));
 
       entryDiv.classList.add(entry.profile.toLowerCase().replace(/ /g, '-'));
 
+      resultPtimeStamp.appendChild(categorySpan);
+      resultPtimeStamp.appendChild(timestampSpan);
       entryDiv.appendChild(resultPtimeStamp);
+      resultP.appendChild(resultPweight);
+      resultP.appendChild(resultPactivity);
+      resultP.appendChild(resultPresult);
+      resultP.appendChild(resultPspacer);
       entryDiv.appendChild(resultP);
       historyDiv.appendChild(entryDiv);
     }
