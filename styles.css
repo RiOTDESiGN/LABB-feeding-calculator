@@ -45,6 +45,11 @@ a {
     color: inherit;
 }
 
+hr {
+    border: 1px dashed #000;
+    border-radius: 10px;
+}
+
 h1 {
     font-size: 26px;
     padding: 10px;
@@ -263,8 +268,11 @@ select {
 }
 
 .timestamp {
-    text-align: right;
-    font-style: italic;
+    display: flex;
+    justify-content: space-between;
+    /* text-align: right; */
+    font-weight: 600;
+    color: #fff;
 }
 
 .entries {
@@ -274,6 +282,7 @@ select {
     text-align: left;
     margin: 0 16px;
     font-size: 12px;
+    color:#fff;
 }
 
 .voksen {
