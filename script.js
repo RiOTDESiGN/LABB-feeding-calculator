@@ -483,8 +483,8 @@ function calculateFoodAmount() {
 
 //  Max 2 digits on inputs
 function maxInput() {
-  var ageInput = document.getElementById("age");
-  var weightInput = document.getElementById("weight");
+  const ageInput = document.getElementById("age");
+  const weightInput = document.getElementById("weight");
 
   if (ageInput.value.length > ageInput.maxLength) ageInput.value = ageInput.value.slice(0, ageInput.maxLength);
 
@@ -527,7 +527,7 @@ document.getElementById("puppyForm").addEventListener("submit", function (event)
 updateProfile();
 
 // History Local Storage
-var historyList = [];
+let historyList = [];
 
 // Load history from localStorage if available
 if (localStorage.getItem("historyList")) {
@@ -536,14 +536,14 @@ if (localStorage.getItem("historyList")) {
 }
 
 function storeResult() {
-  var profile = profiles[currentIndex].kategori;
-  var age = document.getElementById("age").value;
-  var weight = document.getElementById("weight").value;
-  var activity = document.getElementById("activity").value;
-  var result = document.getElementById("foodAmount").textContent;
-  var timestamp = new Date().toLocaleDateString();
+  const profile = profiles[currentIndex].kategori;
+  const age = document.getElementById("age").value;
+  const weight = document.getElementById("weight").value;
+  const activity = document.getElementById("activity").value;
+  const result = document.getElementById("foodAmount").textContent;
+  const timestamp = new Date().toLocaleDateString();
 
-  var entry = {
+  const entry = {
     profile: profile,
     age: age,
     weight: weight,
@@ -562,36 +562,36 @@ function storeResult() {
 }
 
 function updateHistory() {
-  var historyDiv = document.getElementById("history");
+  const historyDiv = document.getElementById("history");
   historyDiv.textContent = "";
 
   if (historyList.length === 0) {
-    var defaultText = document.createElement("p");
-    var defaultText2 = document.createElement("p");
+    const defaultText = document.createElement("p");
+    const defaultText2 = document.createElement("p");
     defaultText.textContent = "Ingen historikk tilgjengelig.";
     defaultText2.textContent = "Bruk appen for å se dine siste 10 resultater her.";
     historyDiv.appendChild(defaultText);
     historyDiv.appendChild(defaultText2);
   } else {
-    for (var i = 0; i < historyList.length; i++) {
-      var entry = historyList[i];
-      var entryDiv = document.createElement("div");
-      var resultPage = document.createElement("p");
-      var resultPweight = document.createElement("p");
-      var resultPactivity = document.createElement("p");
-      var resultPresult = document.createElement("p");
-      var resultPspacer = document.createElement("p");
-      var resultP = document.createElement("div");
-      var resultPtimeStamp = document.createElement("div");
-      var categorySpan = document.createElement("span");
-      var timestampSpan = document.createElement("span");
+    for (let i = 0; i < historyList.length; i++) {
+      const entry = historyList[i];
+      const entryDiv = document.createElement("div");
+      const resultPage = document.createElement("p");
+      const resultPweight = document.createElement("p");
+      const resultPactivity = document.createElement("p");
+      const resultPresult = document.createElement("p");
+      const resultPspacer = document.createElement("p");
+      const resultP = document.createElement("div");
+      const resultPtimeStamp = document.createElement("div");
+      const categorySpan = document.createElement("span");
+      const timestampSpan = document.createElement("span");
 
-      var options = { year: "numeric", month: "long", day: "numeric" };
-      var timestamp = new Date(entry.timestamp).toLocaleDateString("no-NO", options);
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      const timestamp = new Date(entry.timestamp).toLocaleDateString("no-NO", options);
 
       // Create separate text nodes for each part of the text
-      var categoryText = document.createTextNode(entry.profile);
-      var ageText;
+      const categoryText = document.createTextNode(entry.profile);
+      let ageText;
       if (entry.age === "1") {
         ageText = document.createTextNode(entry.age + " måned");
       } else if (entry.age === "16") {
@@ -599,11 +599,11 @@ function updateHistory() {
       } else {
         ageText = document.createTextNode(entry.age + " måneder");
       }
-      var changeText = document.createTextNode("Dette er den siste måneden på valpefôr. LABB har flere gode alternativer til din hund, vi anbefaler LABB VOKSEN.");
-      var weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
-      var activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
-      var resultText = document.createTextNode("Mengde: " + entry.result);
-      var dateText = document.createTextNode(timestamp);
+      const changeText = document.createTextNode("Dette er den siste måneden på valpefôr. LABB har flere gode alternativer til din hund, vi anbefaler LABB VOKSEN.");
+      const weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
+      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
+      const resultText = document.createTextNode("Mengde: " + entry.result);
+      const dateText = document.createTextNode(timestamp);
 
       // Append text nodes
       resultPtimeStamp.className = "timestamp";
