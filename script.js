@@ -3,10 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   Fancybox.bind("[data-fancybox]", {});
 });
 
+document.getElementById("reset").style.display = "none";
+
 // Check if the website has been loaded before
 if (localStorage.getItem("historyList")) {
   // Code to run only the first time the webpage is loaded
-  document.getElementById("historikk-container").style.visibility = "visible";
+  document.getElementById("historikk-container").style.display = "block";
+  document.getElementById("reset").style.display = "block";
 }
 
 //  Feeding profiles
@@ -516,12 +519,14 @@ document.getElementById("puppyForm").addEventListener("submit", function (event)
 
   // Display the result on the webpage
   document.getElementById("result").style.display = "block";
+  document.getElementById("reset").style.display = "block";
+  document.getElementById("history").style.alignItems = "normal";
 
   // Add result to history
   storeResult();
 
   // Show history
-  document.getElementById("historikk-container").style.visibility = "visible";
+  document.getElementById("historikk-container").style.display = "block";
 });
 
 updateProfile();
@@ -569,7 +574,7 @@ function updateHistory() {
     const defaultText = document.createElement("p");
     const defaultText2 = document.createElement("p");
     defaultText.textContent = "Ingen historikk tilgjengelig.";
-    defaultText2.textContent = "Bruk appen for å se dine siste 10 resultater her.";
+    defaultText2.textContent = "Dine siste 10 søk vil vises her.";
     historyDiv.appendChild(defaultText);
     historyDiv.appendChild(defaultText2);
   } else {
@@ -595,13 +600,13 @@ function updateHistory() {
       if (entry.age === "1") {
         ageText = document.createTextNode(entry.age + " måned");
       } else if (entry.age === "16") {
-        ageText = document.createTextNode(entry.age + " måneder.");
+        ageText = document.createTextNode(entry.age + " måneder");
       } else {
         ageText = document.createTextNode(entry.age + " måneder");
       }
-      const changeText = document.createTextNode("Dette er den siste måneden på valpefôr. LABB har flere gode alternativer til din hund, vi anbefaler LABB VOKSEN.");
+      const changeText = document.createTextNode("Dette er den siste måneden på valpefôr. LABB har flere gode fôr-alternativer til din hund, vi anbefaler å starte på LABB VOKSEN.");
       const weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
-      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
+      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity); 
       const resultText = document.createTextNode("Mengde: " + entry.result);
       const dateText = document.createTextNode(timestamp);
 
@@ -649,9 +654,11 @@ function clearHistory() {
 }
 
 const reset = document.getElementById("reset");
-reset.addEventListener("mousedown", function (event) {
+reset.addEventListener("mouseup", function (event) {
   event.preventDefault(); // Prevent the default link behavior
   document.getElementById("result").style.display = "none";
+  document.getElementById("reset").style.display = "none";
+  document.getElementById("history").style.alignItems = "center";
   document.getElementById("age").value = "";
   document.getElementById("weight").value = "";
   document.getElementById("activity").value = "";
