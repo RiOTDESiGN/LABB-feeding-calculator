@@ -19,11 +19,17 @@
         <div id="navi" class="navi">
           <img src="left-arrow.png" id="left" alt="Left" class="arrow"><h3 id="kategori">VALP</h3><img src="right-arrow.png" id="right" alt="Right" class="arrow">
         </div>
-        <!-- <div id="dogs" class="dogs"><img id="dog" src="aktivdog.png" alt="running dogs" class="dog"></div> -->
-        <div class="replace">
-          <input type="number" id="weight" name="weight" required min="8" max="90" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
-          <div id="cut" class="cut"></div>
-          <label id="weightplaceholder" for="weight" class="placeholder">-- Skriv inn vekt --</label>
+        <div class="inputcontainer">
+          <div id="hide" class="replace hide">
+            <input type="number" id="age" name="age" required min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
+            <div id="cut2" class="cut"></div>
+            <label for="age" class="placeholder">-- Alder --</label>
+          </div>
+          <div class="replace">
+            <input type="number" id="weight" name="weight" required min="8" max="90" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
+            <div id="cut" class="cut"></div>
+            <label for="weight" class="placeholder">-- Vekt --</label>
+          </div>
         </div>
         <div class="selector">
           <label for="activity"><h2>Aktivitetsnivå:</h2></label>
@@ -31,7 +37,7 @@
               <option value="">-- Velg aktivitetsnivå --</option>
               <option id="lavt" value="lavt">Lavt</option>
               <option id="middels" value="middels">Middels</option>
-              <option id="høyt" value="høyt">Høyt</option>
+              <option id="hoyt" value="hoyt">Høyt</option>
           </select>
         </div>
         <button type="submit" class="button-hover">Regn ut</button>

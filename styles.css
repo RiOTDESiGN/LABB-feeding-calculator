@@ -201,6 +201,10 @@ select {
     position: relative;
 }
 
+.hide {
+    display: none;
+}
+
 .selector {
     display: flex;
     flex-direction: column;
@@ -270,7 +274,6 @@ select {
 .timestamp {
     display: flex;
     justify-content: space-between;
-    /* text-align: right; */
     font-weight: 600;
     color: #fff;
 }
@@ -285,45 +288,48 @@ select {
     color:#fff;
 }
 
-.voksen {
-    background-color: #00538a;
+.entry {
     padding: 10px;
     border-radius: 10px;
+}
+
+.valp {
+    background-color: #006f43;
+}
+
+.voksen {
+    background-color: #00538a;
+}
+
+.voksen {
+    background-color: #00538a;
 }
 
 .aktiv {
     background-color: #b51826;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .ekstrem-energi {
     background-color: #02304f;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .sensitiv {
     background-color: #a0715c;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .senior {
     background-color: #c84e2d;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 .vektkontroll {
     background-color: #b41c69;
-    padding: 10px;
-    border-radius: 10px;
 }
 
 /* ******************************************************************* */
 
 .inputcontainer {
+    display: flex;
+    gap: 10px;
     height: 50px;
     width: 100%;
     position: relative;
