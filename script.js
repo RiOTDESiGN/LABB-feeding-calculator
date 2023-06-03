@@ -283,14 +283,18 @@ function calculateFoodAmount(kategori, age, weight, activity) {
 
     if (foodAmount !== "") {
       if (activity === "lavt") {
-        return foodAmount.toString().slice(0, 3);
-      } else if (activity === "hoyt") {
-        return foodAmount.toString().slice(-3);
-      } else if (activity === "middels") {
         const range = foodAmount.split("-");
         const lowerValue = parseInt(range[0], 10);
+        return lowerValue;
+      } else if (activity === "hoyt") {
+        range = foodAmount.split("-");
         const upperValue = parseInt(range[1], 10);
-        const average = (lowerValue + upperValue) / 2;
+        return upperValue;
+      } else if (activity === "middels") {
+        range = foodAmount.split("-");
+        lowerValue = parseInt(range[0], 10);
+        upperValue = parseInt(range[1], 10);
+        average = (lowerValue + upperValue) / 2;
         return average;
       }
     }
