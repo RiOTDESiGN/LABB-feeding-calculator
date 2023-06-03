@@ -190,13 +190,10 @@ document.getElementById("right").addEventListener("click", () => {
   updateProfile();
 });
 
+
 //  LABB Feeding Information
-function calculateFoodAmount() {
+function calculateFoodAmount(kategori, age, weight, activity) {
   let foodAmount = "";
-  const kategori = profiles[currentIndex].kategori;
-  const age = parseInt(document.getElementById("age").value, 10);
-  const weight = parseInt(document.getElementById("weight").value, 10);
-  const activity = document.getElementById("activity").value;
 
   if (kategori === "VALP") {
     const foodAmounts = [
@@ -501,21 +498,15 @@ document.getElementById("weight").addEventListener("input", maxInput);
 document.getElementById("puppyForm").addEventListener("submit", function (event) {
   event.preventDefault(); // Prevent form submission
 
-  // Get input values
+  // Define inputs
   const kategori = profiles[currentIndex].kategori;
   const age = parseInt(document.getElementById("age").value, 10);
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = document.getElementById("activity").value;
-  let foodAmount = calculateFoodAmount();
 
   // Calculate food amount based on the inputs
-  if (kategori === "VALP") {
-    foodAmount = calculateFoodAmount(age, weight, activity, profiles[currentIndex].kategori);
-    document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
-  } else {
-    foodAmount = calculateFoodAmount(weight, activity, profiles[currentIndex].kategori);
-    document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
-  }
+  foodAmount = calculateFoodAmount(kategori, age, weight, activity);
+  document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
 
   // Display the result on the webpage
   document.getElementById("result").style.display = "block";
@@ -542,8 +533,8 @@ if (localStorage.getItem("historyList")) {
 
 function storeResult() {
   const profile = profiles[currentIndex].kategori;
-  const age = document.getElementById("age").value;
-  const weight = document.getElementById("weight").value;
+  const age = parseInt(document.getElementById("age").value, 10);
+  const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = document.getElementById("activity").value;
   const result = document.getElementById("foodAmount").textContent;
   const timestamp = new Date().toLocaleDateString();
