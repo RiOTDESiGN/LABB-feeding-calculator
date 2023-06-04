@@ -48,11 +48,6 @@ a {
 a:hover {
         color: #000;
 }
-a:after {
-    content: '.';
-    color: #dad4c7;
-    font-weight: 100;
-}
 
 hr {
     border: 1px dashed #000;
