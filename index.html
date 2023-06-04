@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="script.js" defer></script>
 <link rel="stylesheet" href="styles.css">
 <title>Labb Valpefôr Kalkulator</title>
@@ -53,14 +54,15 @@
           <img id="lite" src="valp.png" alt="15kg pose" class="pose" />
           </a>
       </div>
-      <div id="historikk-container" class="historikk-container">
+      <div id="historikk-container" class="historikk-container flex-card">
         <h2>Historikk over fôringsmengde:</h2>
+        <h2 id="historyTab" class="flex-card-header">(skjul eller vis historikk)</h2>
         <div id="history" class="entries"></div>
         <div class="align"><span id="reset" class="reset">slett</span></div>
       </div>
       <a href="https://www.felleskjopet.no/kjaeledyr/hund/hundefor-og-tilskudd/toerrfor/labb-valp-mellstor-15kg-12343/" target="_blank">
         <img src="FK.svg" alt="Felleskjøpet logo" class="FK">
-        </a>
+      </a>
     </div>
   </div>
 </body>

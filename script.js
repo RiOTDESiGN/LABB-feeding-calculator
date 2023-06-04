@@ -266,6 +266,7 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
 
   // Display the result on the webpage
   document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
+  document.getElementById("historyTab").style.display = "block";
   document.getElementById("result").style.display = "block";
   document.getElementById("reset").style.display = "block";
   document.getElementById("history").style.alignItems = "normal";
@@ -367,8 +368,6 @@ function updateHistory() {
       let ageText;
       if (entry.age === 1) {
         ageText = document.createTextNode(entry.age + " måned");
-      } else if (entry.age === 16) {
-        ageText = document.createTextNode(entry.age + " måneder");
       } else {
         ageText = document.createTextNode(entry.age + " måneder");
       }
@@ -387,12 +386,12 @@ function updateHistory() {
       resultPspacer.appendChild(document.createElement("br"));
       resultPspacer.appendChild(document.createElement("hr"));
       if (entry.age === 16) {
-        resultPage.appendChild(document.createElement("br"));
+        resultPspacer.appendChild(document.createElement("br"));
         lastMonthSpan.classList.add("last-month");
         lastMonthSpan.appendChild(changeText);
-        resultPage.appendChild(lastMonthSpan);
-        resultPage.appendChild(document.createElement("br"));
-        resultPage.appendChild(lastMonthLink);
+        resultPspacer.appendChild(lastMonthSpan);
+        resultPspacer.appendChild(document.createElement("br"));
+        resultPspacer.appendChild(lastMonthLink);
         lastMonthLink.appendChild(lastMonth);
         lastMonthLink.appendChild(link);
       }
@@ -405,9 +404,7 @@ function updateHistory() {
       resultPtimeStamp.appendChild(categorySpan);
       resultPtimeStamp.appendChild(timestampSpan);
       entryDiv.appendChild(resultPtimeStamp);
-      if (entry.profile === "VALP") {
-        resultP.appendChild(resultPage);
-      }
+      if (entry.profile === "VALP") {resultP.appendChild(resultPage);}
       resultP.appendChild(resultPweight);
       resultP.appendChild(resultPactivity);
       resultP.appendChild(resultPresult);
@@ -417,6 +414,24 @@ function updateHistory() {
     }
   }
 }
+
+
+// Expandable flex-cards for more convenient history sorting
+$(document).ready(function() {
+  $(".flex-card-header").click(function() {
+    const card = $(this).closest(".flex-card");
+    const content = card.find(".entries");
+
+    if (content.is(":visible")) {
+      document.getElementById("reset").style.display = "none";
+      content.slideUp();
+    } else {
+      document.getElementById("reset").style.display = "block";
+      $(".entries").slideUp();
+      content.slideDown();
+    }
+  });
+});
 
 
 // Create a function to clear the history list and remove the history from local storage
@@ -436,6 +451,7 @@ reset.addEventListener("mouseup", function (event) {
   document.getElementById("activity").value = "";
   document.getElementById("reset").style.display = "none";
   document.getElementById("result").style.display = "none";
+  document.getElementById("historyTab").style.display = "none";
   document.getElementById("history").style.alignItems = "center";
   clearHistory();
 });
