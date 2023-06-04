@@ -3,176 +3,86 @@ document.addEventListener("DOMContentLoaded", function () {
   Fancybox.bind("[data-fancybox]", {});
 });
 
-document.getElementById("reset").style.display = "none";
 
 // Check if the website has been loaded before
 if (localStorage.getItem("historyList")) {
   // Code to run only the first time the webpage is loaded
   document.getElementById("historikk-container").style.display = "block";
   document.getElementById("reset").style.display = "block";
+} else {
+  // Hide the "slett"-button if there is no previous history
+  document.getElementById("reset").style.display = "none";
 }
 
-//  Feeding profiles
-const profiles = [
-  {
-    kategori: "VALP",
-    kategoriSize: "clamp(1em, 12vw, 2.85em)",
-    bgColor: "#006f43",
-    border: "3px solid #006f43",
-    imgSrc: "valp.png",
-    imgHref: "valp.webp",
-    amountColor: "#006f43",
-    caption: "Labb Valp hundefôr mellom- og store raser 15 kg",
-    middels: "block",
-    lavt: "Lavt",
-    hoyt: "Høyt",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "1",
-    max: "80",
-    showAge: "block"
-  },
-  {
-    kategori: "VOKSEN",
-    kategoriSize: "clamp(1em, 12vw, 2.85em)",
-    bgColor: "#00538a",
-    border: "3px solid #00538a",
-    imgSrc: "voksen.png",
-    imgHref: "voksen.webp",
-    amountColor: "#00538a",
-    caption: "Labb Voksen hundefôr mellom- og stor rase 15 kg",
-    middels: "block",
-    lavt: "Lavt",
-    hoyt: "Høyt",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "15",
-    max: "80",
-    showAge: "none"
-  },
-  {
-    kategori: "AKTIV",
-    kategoriSize: "clamp(1em, 12vw, 2.85em)",
-    bgColor: "#b51826",
-    border: "3px solid #b51826",
-    imgSrc: "aktiv.png",
-    imgHref: "aktiv.webp",
-    amountColor: "#b51826",
-    caption: "Labb Aktiv hundefôr hunder alle størrelser 15 kg",
-    middels: "none",
-    lavt: "Moderat aktivitet (1 – 3 timer)",
-    hoyt: "Hardt arbeid (3 – 6 timer)",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "8",
-    max: "90",
-    showAge: "none"
-  },
-  {
-    kategori: "EKSTREM ENERGI",
-    kategoriSize: "clamp(0.5em, 10vw, 2.3em)",
-    bgColor: "#02304f",
-    border: "3px solid #02304f",
-    imgSrc: "ekstrem.png",
-    imgHref: "ekstrem.webp",
-    amountColor: "#02304f",
-    caption: "Labb Ekstrem Energi hundefôr hardtarbeidende hunder 15 kg",
-    middels: "none",
-    lavt: "Hardt arbeid, jakt, trening og løp (3 – 6 timer)",
-    hoyt: "Svært hardt arbeid, jakt, trening og løp (over 6 timer)",
-    font: "12px",
-    fontpadding: "17px 0",
-    min: "8",
-    max: "60",
-    showAge: "none"
-  },
-  {
-    kategori: "SENSITIV",
-    kategoriSize: "clamp(0.5em, 10vw, 2.5em)",
-    bgColor: "#a0715c",
-    border: "3px solid #a0715c",
-    imgSrc: "sensitiv.png",
-    imgHref: "sensitiv.webp",
-    amountColor: "#a0715c",
-    caption: "Labb Sensitiv hundefôr mellom- og store hunder 15 kg",
-    middels: "block",
-    lavt: "Lavt",
-    hoyt: "Høyt",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "15",
-    max: "80",
-    showAge: "none"
-  },
-  {
-    kategori: "SENIOR",
-    kategoriSize: "clamp(1em, 12vw, 2.85em)",
-    bgColor: "#c84e2d",
-    border: "3px solid #c84e2d",
-    imgSrc: "senior.png",
-    imgHref: "senior.webp",
-    amountColor: "#c84e2d",
-    caption: "Labb Senior hundefôr mellom- og store hunder 15 kg",
-    middels: "block",
-    lavt: "Lavt",
-    hoyt: "Høyt",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "15",
-    max: "90",
-    showAge: "none"
-  },
-  {
-    kategori: "VEKTKONTROLL",
-    kategoriSize: "clamp(0.8em, 6vw, 1.45em)",
-    bgColor: "#b41c69",
-    border: "3px solid #b41c69",
-    imgSrc: "vektkontroll.png",
-    imgHref: "vektkontroll.webp",
-    amountColor: "#b41c69",
-    caption: "Labb Vektkontroll hundefôr mellom- og store hunder 15 kg",
-    middels: "block",
-    lavt: "Lavt",
-    hoyt: "Høyt",
-    font: "18px",
-    fontpadding: "14px 0",
-    min: "15",
-    max: "90",
-    showAge: "none"
-  }
-];
 
+// Functions to fetch JSON data
+async function fetchProfilesData() {
+  try {
+    const response = await fetch("profiles.JSON");
+    const jsonData = await response.json();
+    return jsonData.profiles;
+  } catch (error) {
+    console.log("Error fetching profiles JSON data:", error);
+    return [];
+  }
+}
+
+async function fetchFoodTypesData() {
+  try {
+    const response = await fetch("foodTypes.JSON");
+    const jsonData = await response.json();
+    return jsonData;
+  } catch (error) {
+    console.log("Error fetching foodtypes JSON data:", error);
+    return [];
+  }
+}
+
+
+// Current active profile
 let currentIndex = 0;
 
-//  Profile Updater
-function updateProfile() {
+
+// Profiles Updater
+async function updateProfile() {
+  const profiles = await fetchProfilesData();
   const profile = profiles[currentIndex];
 
-  document.querySelectorAll(".nav-icon span").backgroundColor = profile.navColor;
-  document.getElementById("navi").style.fontSize = profile.kategoriSize;
-  document.getElementById("kategori").textContent = profile.kategori;
-  document.getElementById("puppyForm").style.backgroundColor = profile.bgColor;
-  document.getElementById("puppyForm").style.border = profile.border;
-  document.getElementById("cut").style.backgroundColor = profile.bgColor;
-  document.getElementById("cut2").style.backgroundColor = profile.bgColor;
-  document.getElementById("foodAmount").style.color = profile.amountColor;
-  document.getElementById("stort").dataset.caption = profile.caption;
-  document.getElementById("stort").href = profile.imgHref;
-  document.getElementById("lite").src = profile.imgSrc;
-  document.getElementById("middels").style.display = profile.middels;
-  document.getElementById("lavt").textContent = profile.lavt;
-  document.getElementById("hoyt").textContent = profile.hoyt;
-  document.getElementById("activity").style.fontSize = profile.font;
-  document.getElementById("activity").style.padding = profile.fontpadding;
-  document.getElementById("weight").min = profile.min;
-  document.getElementById("weight").max = profile.max;
-  document.getElementById("hide").style.display = profile.showAge;
+  // Profile CSS styles
+  document.getElementById   ("navi")        .style.fontSize         = profile.kategoriSize;
+  document.getElementById   ("activity")    .style.fontSize         = profile.font;
+  document.getElementById   ("cutWeight")   .style.backgroundColor  = profile.bgColor;
+  document.getElementById   ("cutAge")      .style.backgroundColor  = profile.bgColor;
+  document.getElementById   ("puppyForm")   .style.backgroundColor  = profile.bgColor;
+  document.getElementById   ("middels")     .style.display          = profile.middels;
+  document.getElementById   ("hide")        .style.display          = profile.showAge;
+  document.getElementById   ("puppyForm")   .style.border           = profile.border;
+  document.getElementById   ("foodAmount")  .style.color            = profile.amountColor;
+  document.getElementById   ("activity")    .style.padding          = profile.fontpadding;
 
-  document.getElementById("result").style.display = "none";
-  document.getElementById("age").value = "";
-  document.getElementById("weight").value = "";
-  document.getElementById("activity").value = "";
+  // Change caption on large Fancybox images
+  document.getElementById   ("stort")       .dataset.caption        = profile.caption;
 
+  // Change category and select options text
+  document.getElementById   ("kategori")    .textContent            = profile.kategori;
+  document.getElementById   ("lavt")        .textContent            = profile.lavt;
+  document.getElementById   ("hoyt")        .textContent            = profile.hoyt;
+
+  // Change links and image sources
+  document.getElementById   ("stort")       .href                   = profile.imgHref;
+  document.getElementById   ("lite")        .src                    = profile.imgSrc;
+
+  // Change min and max required values in input fields
+  document.getElementById   ("weight")      .min                    = profile.min;
+  document.getElementById   ("weight")      .max                    = profile.max;
+
+  // Empty input and result fields
+  document.getElementById   ("result")      .style.display = "none";
+  document.getElementById   ("age")         .value = "";
+  document.getElementById   ("weight")      .value = "";
+  document.getElementById   ("activity")    .value = "";
+
+  // Make "age required" optional depending on active profile
   if (profile.kategori !== "VALP") {
     document.getElementById("age").removeAttribute("required");
   } else {
@@ -180,85 +90,33 @@ function updateProfile() {
   }
 }
 
-document.getElementById("left").addEventListener("click", () => {
+
+// Apply the active profile on pageload
+updateProfile();
+
+
+// Navigation arrows that change the active profile
+document.getElementById("left").addEventListener("click", async () => {
+  const profiles = await fetchProfilesData();
   currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
   updateProfile();
 });
 
-document.getElementById("right").addEventListener("click", () => {
+document.getElementById("right").addEventListener("click", async () => {
+  const profiles = await fetchProfilesData();
   currentIndex = (currentIndex + 1) % profiles.length;
   updateProfile();
 });
 
 
-//  LABB Feeding Information
-function calculateFoodAmount(kategori, age, weight, activity) {
+//  Calculate the recommended amount of dogfood on the active profile
+async function calculateFoodAmount(kategori, age, weight, activity) {
   let foodAmount = "";
-
+  // Calculation for puppies
   if (kategori === "VALP") {
-    const foodAmounts = [
-      {
-        kategori: "VALP",
-        ageRanges: [
-          {
-            ageRange: [1, 5],
-            weightRanges: [
-              { min: 1, max: 3, amount: "70-125" },
-              { min: 3, max: 5, amount: "135-195" },
-              { min: 5, max: 8, amount: "195-280" },
-              { min: 8, max: 11, amount: "280-350" },
-              { min: 11, max: 15, amount: "350-440" },
-              { min: 15, max: 20, amount: "440-550" },
-              { min: 20, max: 25, amount: "550-650" }
-            ]
-          },
-          {
-            ageRange: [6, 8],
-            weightRanges: [
-              { min: 5, max: 8, amount: "160-230" },
-              { min: 8, max: 11, amount: "230-290" },
-              { min: 11, max: 15, amount: "290-340" },
-              { min: 15, max: 20, amount: "340-430" },
-              { min: 20, max: 25, amount: "430-510" },
-              { min: 25, max: 30, amount: "510-595" },
-              { min: 35, max: 40, amount: "595-670" },
-              { min: 40, max: 45, amount: "670-730" }
-            ]
-          },
-          {
-            ageRange: [9, 12],
-            weightRanges: [
-              { min: 11, max: 15, amount: "235-340" },
-              { min: 15, max: 20, amount: "340-405" },
-              { min: 20, max: 25, amount: "405-470" },
-              { min: 25, max: 30, amount: "470-530" },
-              { min: 35, max: 40, amount: "530-590" },
-              { min: 40, max: 45, amount: "590-650" },
-              { min: 45, max: 50, amount: "650-705" },
-              { min: 50, max: 60, amount: "705-790" },
-              { min: 60, max: 70, amount: "790-880" },
-              { min: 70, max: 80, amount: "880-970" }
-            ]
-          },
-          {
-            ageRange: [13, 16],
-            weightRanges: [
-              { min: 15, max: 20, amount: "330-360" },
-              { min: 20, max: 25, amount: "360-400" },
-              { min: 25, max: 30, amount: "400-430" },
-              { min: 35, max: 40, amount: "430-515" },
-              { min: 40, max: 45, amount: "515-620" },
-              { min: 45, max: 50, amount: "620-720" },
-              { min: 50, max: 60, amount: "720-820" },
-              { min: 60, max: 70, amount: "820-900" },
-              { min: 70, max: 80, amount: "900-950" }
-            ]
-          }
-        ]
-      }
-    ];
+    const foodTypesData = await fetchFoodTypesData();
 
-    const categoryObj = foodAmounts.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmounts.find((item) => item.kategori === kategori);
 
     if (categoryObj) {
       const { ageRanges } = categoryObj;
@@ -287,92 +145,22 @@ function calculateFoodAmount(kategori, age, weight, activity) {
         const lowerValue = parseInt(range[0], 10);
         return lowerValue;
       } else if (activity === "hoyt") {
-        range = foodAmount.split("-");
+        const range = foodAmount.split("-");
         const upperValue = parseInt(range[1], 10);
         return upperValue;
       } else if (activity === "middels") {
-        range = foodAmount.split("-");
-        lowerValue = parseInt(range[0], 10);
-        upperValue = parseInt(range[1], 10);
-        average = (lowerValue + upperValue) / 2;
+        const range = foodAmount.split("-");
+        const lowerValue = parseInt(range[0], 10);
+        const upperValue = parseInt(range[1], 10);
+        const average = (lowerValue + upperValue) / 2;
         return average;
       }
     }
+  // Calculations for adult dogs
   } else if (kategori === "VOKSEN" || kategori === "SENIOR" || kategori === "SENSITIV" || kategori === "VEKTKONTROLL") {
-    const foodAmountsADULT = [
-      {
-        kategori: "VOKSEN",
-        weightRanges: [
-          { caWeight: 15, amount: "220" },
-          { caWeight: 20, amount: "280" },
-          { caWeight: 25, amount: "320" },
-          { caWeight: 30, amount: "360" },
-          { caWeight: 35, amount: "400" },
-          { caWeight: 40, amount: "440" },
-          { caWeight: 45, amount: "480" },
-          { caWeight: 50, amount: "520" },
-          { caWeight: 55, amount: "560" },
-          { caWeight: 60, amount: "600" },
-          { caWeight: 70, amount: "680" },
-          { caWeight: 80, amount: "770" }
-        ]
-      },
-      {
-        kategori: "SENIOR",
-        weightRanges: [
-          { caWeight: 15, amount: "200" },
-          { caWeight: 20, amount: "240" },
-          { caWeight: 25, amount: "280" },
-          { caWeight: 30, amount: "320" },
-          { caWeight: 35, amount: "365" },
-          { caWeight: 40, amount: "400" },
-          { caWeight: 45, amount: "440" },
-          { caWeight: 50, amount: "480" },
-          { caWeight: 55, amount: "510" },
-          { caWeight: 60, amount: "545" },
-          { caWeight: 70, amount: "640" },
-          { caWeight: 80, amount: "720" },
-          { caWeight: 90, amount: "810" }
-        ]
-      },
-      {
-        kategori: "SENSITIV",
-        weightRanges: [
-          { caWeight: 15, amount: "210" },
-          { caWeight: 20, amount: "270" },
-          { caWeight: 25, amount: "300" },
-          { caWeight: 30, amount: "350" },
-          { caWeight: 35, amount: "390" },
-          { caWeight: 40, amount: "430" },
-          { caWeight: 45, amount: "470" },
-          { caWeight: 50, amount: "510" },
-          { caWeight: 55, amount: "550" },
-          { caWeight: 60, amount: "590" },
-          { caWeight: 70, amount: "670" },
-          { caWeight: 80, amount: "760" }
-        ]
-      },
-      {
-        kategori: "VEKTKONTROLL",
-        weightRanges: [
-          { caWeight: 15, amount: "210" },
-          { caWeight: 20, amount: "240" },
-          { caWeight: 25, amount: "280" },
-          { caWeight: 30, amount: "320" },
-          { caWeight: 35, amount: "365" },
-          { caWeight: 40, amount: "400" },
-          { caWeight: 45, amount: "440" },
-          { caWeight: 50, amount: "480" },
-          { caWeight: 55, amount: "510" },
-          { caWeight: 60, amount: "545" },
-          { caWeight: 70, amount: "640" },
-          { caWeight: 80, amount: "720" },
-          { caWeight: 90, amount: "810" }
-        ]
-      }
-    ];
+    const foodTypesData = await fetchFoodTypesData();
 
-    const categoryObj = foodAmountsADULT.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmountsADULT.find((item) => item.kategori === kategori);
 
     if (categoryObj) {
       const { weightRanges } = categoryObj;
@@ -411,46 +199,9 @@ function calculateFoodAmount(kategori, age, weight, activity) {
     }
 
     return foodAmount;
+  // Calculations for working dogs
   } else {
-    const foodAmountsENERGY = [
-      {
-        kategori: "AKTIV",
-        weightRanges: [
-          { weight: 8, amountL: "120", amountH: "140" },
-          { weight: 10, amountL: "160", amountH: "190" },
-          { weight: 12, amountL: "190", amountH: "230" },
-          { weight: 15, amountL: "210", amountH: "260" },
-          { weight: 20, amountL: "270", amountH: "330" },
-          { weight: 25, amountL: "330", amountH: "390" },
-          { weight: 30, amountL: "330", amountH: "450" },
-          { weight: 35, amountL: "410", amountH: "500" },
-          { weight: 40, amountL: "450", amountH: "540" },
-          { weight: 45, amountL: "490", amountH: "580" },
-          { weight: 50, amountL: "520", amountH: "620" },
-          { weight: 55, amountL: "550", amountH: "670" },
-          { weight: 60, amountL: "600", amountH: "710" },
-          { weight: 70, amountL: "690", amountH: "890" },
-          { weight: 80, amountL: "780", amountH: "1000" },
-          { weight: 90, amountL: "870", amountH: "1100" }
-        ]
-      },
-      {
-        kategori: "EKSTREM ENERGI",
-        weightRanges: [
-          { weight: 10, amountL: "180", amountH: "300" },
-          { weight: 15, amountL: "220", amountH: "405" },
-          { weight: 20, amountL: "280", amountH: "510" },
-          { weight: 25, amountL: "330", amountH: "600" },
-          { weight: 30, amountL: "380", amountH: "675" },
-          { weight: 35, amountL: "420", amountH: "765" },
-          { weight: 40, amountL: "460", amountH: "855" },
-          { weight: 45, amountL: "490", amountH: "930" },
-          { weight: 50, amountL: "520", amountH: "1005" },
-          { weight: 55, amountL: "550", amountH: "1080" },
-          { weight: 60, amountL: "600", amountH: "1155" }
-        ]
-      }
-    ];
+    const foodTypesData = await fetchFoodTypesData();
 
     function roundToClosestWeight(weight, weightRanges) {
       let closestWeight = weightRanges[0].weight;
@@ -469,7 +220,7 @@ function calculateFoodAmount(kategori, age, weight, activity) {
       return closestWeight;
     }
 
-    const categoryObj = foodAmountsENERGY.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmountsENERGY.find((item) => item.kategori === kategori);
 
     if (categoryObj) {
       const { weightRanges } = categoryObj;
@@ -485,7 +236,7 @@ function calculateFoodAmount(kategori, age, weight, activity) {
   }
 }
 
-//  Max 2 digits on inputs
+//  Max 2 digits on age and weight inputs
 function maxInput() {
   const ageInput = document.getElementById("age");
   const weightInput = document.getElementById("weight");
@@ -498,36 +249,38 @@ function maxInput() {
 document.getElementById("age").addEventListener("input", maxInput);
 document.getElementById("weight").addEventListener("input", maxInput);
 
-//  Submit and get results
-document.getElementById("puppyForm").addEventListener("submit", function (event) {
-  event.preventDefault(); // Prevent form submission
+
+//  Submit input values and get the calculated results
+document.getElementById("puppyForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
 
   // Define inputs
+  const profiles = await fetchProfilesData();
   const kategori = profiles[currentIndex].kategori;
   const age = parseInt(document.getElementById("age").value, 10);
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = document.getElementById("activity").value;
 
   // Calculate food amount based on the inputs
-  foodAmount = calculateFoodAmount(kategori, age, weight, activity);
-  document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
+  const foodAmount = await calculateFoodAmount(kategori, age, weight, activity);
 
   // Display the result on the webpage
+  document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
   document.getElementById("result").style.display = "block";
   document.getElementById("reset").style.display = "block";
   document.getElementById("history").style.alignItems = "normal";
 
-  // Add result to history
+  // Add results to history
   storeResult();
 
   // Show history
   document.getElementById("historikk-container").style.display = "block";
 });
 
-updateProfile();
 
-// History Local Storage
+// History localstorage array
 let historyList = [];
+
 
 // Load history from localStorage if available
 if (localStorage.getItem("historyList")) {
@@ -535,7 +288,10 @@ if (localStorage.getItem("historyList")) {
   updateHistory();
 }
 
-function storeResult() {
+
+// Store the calculated results, input values and profile data to the history array
+async function storeResult() {
+  const profiles = await fetchProfilesData();
   const profile = profiles[currentIndex].kategori;
   const age = parseInt(document.getElementById("age").value, 10);
   const weight = parseInt(document.getElementById("weight").value, 10);
@@ -552,8 +308,9 @@ function storeResult() {
     timestamp: timestamp
   };
 
-  historyList.unshift(entry); // Add the new entry to the beginning of the array
-  historyList = historyList.slice(0, 10); // Keep only the latest 10 entries
+  // Add the new entry to the beginning of the array, and keep only the 10 last entries
+  historyList.unshift(entry);
+  historyList = historyList.slice(0, 10);
 
   // Save updated history to localStorage
   localStorage.setItem("historyList", JSON.stringify(historyList));
@@ -561,10 +318,12 @@ function storeResult() {
   updateHistory();
 }
 
+
+// Create a function to add the entry to the history-section of the webpage
 function updateHistory() {
   const historyDiv = document.getElementById("history");
   historyDiv.textContent = "";
-
+  // Show a placeholder text after history content has been deleted by the user
   if (historyList.length === 0) {
     const defaultText = document.createElement("p");
     const defaultText2 = document.createElement("p");
@@ -572,6 +331,7 @@ function updateHistory() {
     defaultText2.textContent = "Dine siste 10 søk vil vises her.";
     historyDiv.appendChild(defaultText);
     historyDiv.appendChild(defaultText2);
+  // Create the history list entry and its content
   } else {
     for (let i = 0; i < historyList.length; i++) {
       const entry = historyList[i];
@@ -585,47 +345,63 @@ function updateHistory() {
       const resultPtimeStamp = document.createElement("div");
       const categorySpan = document.createElement("span");
       const timestampSpan = document.createElement("span");
+      const lastMonthSpan = document.createElement("span");
+      const lastMonthLink = document.createElement("span");
 
+      // Define and set the timestamp format
       const options = { year: "numeric", month: "long", day: "numeric" };
       const timestamp = new Date(entry.timestamp).toLocaleDateString("no-NO", options);
 
-      // Create separate text nodes for each part of the text
+      // Define the history entry content
       const categoryText = document.createTextNode(entry.profile);
+      const changeText = document.createTextNode("Siste måned på valpefôr");
+      const lastMonth = document.createTextNode("LABB har flere gode fôr-alternativer til din hund, og vi anbefaler å starte på LABB VOKSEN. Se vårt sortiment på ");
+      const link = document.createElement("a");
+            link.href = "https://www.labb.no"; // Replace with the actual URL
+            link.textContent = "LABB.no";
+            link.target = "_blank"
+      const weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
+      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
+      const resultText = document.createTextNode("Mengde: " + entry.result);
+      const dateText = document.createTextNode(timestamp);
       let ageText;
-      if (entry.age === "1") {
+      if (entry.age === 1) {
         ageText = document.createTextNode(entry.age + " måned");
-      } else if (entry.age === "16") {
+      } else if (entry.age === 16) {
         ageText = document.createTextNode(entry.age + " måneder");
       } else {
         ageText = document.createTextNode(entry.age + " måneder");
       }
-      const changeText = document.createTextNode("Dette er den siste måneden på valpefôr. LABB har flere gode fôr-alternativer til din hund, vi anbefaler å starte på LABB VOKSEN.");
-      const weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
-      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity); 
-      const resultText = document.createTextNode("Mengde: " + entry.result);
-      const dateText = document.createTextNode(timestamp);
 
-      // Append text nodes
+      // Append the history content to the various entry elements
       resultPtimeStamp.className = "timestamp";
       categorySpan.appendChild(categoryText);
       timestampSpan.appendChild(dateText);
       resultPage.appendChild(document.createElement("br"));
       resultPage.appendChild(ageText);
       resultPage.appendChild(document.createElement("br"));
-      if (entry.age === "16") {
-        resultPage.appendChild(document.createElement("br"));
-        resultPage.appendChild(changeText);
-      }
       resultPweight.appendChild(document.createElement("br"));
       resultPweight.appendChild(weightText);
       resultPactivity.appendChild(activityText);
       resultPresult.appendChild(resultText);
       resultPspacer.appendChild(document.createElement("br"));
       resultPspacer.appendChild(document.createElement("hr"));
+      if (entry.age === 16) {
+        resultPage.appendChild(document.createElement("br"));
+        lastMonthSpan.classList.add("last-month");
+        lastMonthSpan.appendChild(changeText);
+        resultPage.appendChild(lastMonthSpan);
+        resultPage.appendChild(document.createElement("br"));
+        resultPage.appendChild(lastMonthLink);
+        lastMonthLink.appendChild(lastMonth);
+        lastMonthLink.appendChild(link);
+      }
 
+      // Add a style-class to each history entry based on the active profile
       entryDiv.classList.add(entry.profile.toLowerCase().replace(/ /g, "-"));
       entryDiv.classList.add("entry");
 
+      // Combine the entry elements to construct the entry and append it to the webpage
       resultPtimeStamp.appendChild(categorySpan);
       resultPtimeStamp.appendChild(timestampSpan);
       entryDiv.appendChild(resultPtimeStamp);
@@ -642,20 +418,24 @@ function updateHistory() {
   }
 }
 
+
+// Create a function to clear the history list and remove the history from local storage
 function clearHistory() {
-  historyList = []; // Empty the history list
-  localStorage.removeItem("historyList"); // Remove the history list from local storage
-  updateHistory(); // Update the displayed history
+  historyList = [];
+  localStorage.removeItem("historyList");
+  updateHistory();
 }
 
+
+// Define the "slett"-button to clear all input values and the history list content
 const reset = document.getElementById("reset");
 reset.addEventListener("mouseup", function (event) {
-  event.preventDefault(); // Prevent the default link behavior
-  document.getElementById("result").style.display = "none";
-  document.getElementById("reset").style.display = "none";
-  document.getElementById("history").style.alignItems = "center";
+  event.preventDefault();
   document.getElementById("age").value = "";
   document.getElementById("weight").value = "";
   document.getElementById("activity").value = "";
-  clearHistory(); // Clear the history list
+  document.getElementById("reset").style.display = "none";
+  document.getElementById("result").style.display = "none";
+  document.getElementById("history").style.alignItems = "center";
+  clearHistory();
 });
