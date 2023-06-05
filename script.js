@@ -16,7 +16,7 @@ if (localStorage.getItem("historyList")) {
 // Functions to fetch JSON data
 async function fetchProfilesData() {
   try {
-    const response = await fetch("profiles.JSON");
+    const response = await fetch("JSON/profiles.JSON");
     const jsonData = await response.json();
     return jsonData.profiles;
   } catch (error) {
@@ -27,7 +27,7 @@ async function fetchProfilesData() {
 
 async function fetchFoodTypesData() {
   try {
-    const response = await fetch("foodTypes.JSON");
+    const response = await fetch("JSON/foodTypes.JSON");
     const jsonData = await response.json();
     return jsonData;
   } catch (error) {
@@ -382,9 +382,13 @@ function updateHistory() {
             link             .textContent = "LABB.no";
             link             .target = "_blank"
       const weightText     = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
-      const activityValue  = document.createTextNode(entry.activity);
-      const activityText   = document.createTextNode("Aktivitetsnivå: ");
-      const resultText     = document.createTextNode("Mengde: " + entry.result);
+      let activityValue;
+      if (["AKTIV", "EKSTREM ENERGI"].includes(entry.profile)) {
+        activityValue = document.createTextNode(entry.activity);
+      } else {
+        activityValue = document.createTextNode(entry.activity + " aktivitetsnivå");
+      }      
+      const resultText     = document.createTextNode("Anbefalt mengde: " + entry.result);
       const dateText       = document.createTextNode(timestamp);
       let ageText;
       if (entry.age === 1) {
@@ -403,9 +407,6 @@ function updateHistory() {
       resultPage      .appendChild(document.createElement("br"));
       resultPweight   .appendChild(document.createElement("br"));
       resultPweight   .appendChild(weightText);
-      if (!(["AKTIV", "EKSTREM ENERGI"].includes(entry.profile))) {
-        resultPactivity.appendChild(activityText);
-      }      
       resultPactivity .appendChild(activityValue);
       resultPresult   .appendChild(resultText);
       resultPspacer   .appendChild(document.createElement("br"));
