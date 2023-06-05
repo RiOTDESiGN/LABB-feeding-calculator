@@ -381,20 +381,20 @@ function updateHistory() {
             link             .href = "https://www.labb.no"; // Replace with the actual URL
             link             .textContent = "LABB.no";
             link             .target = "_blank"
-      const weightText     = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
+      const weightText     = document.createTextNode(`Hundens vekt: ${entry.weight} kg`);
       let activityValue;
       if (["AKTIV", "EKSTREM ENERGI"].includes(entry.profile)) {
         activityValue = document.createTextNode(entry.activity);
       } else {
-        activityValue = document.createTextNode(entry.activity + " aktivitetsnivå");
+        activityValue = document.createTextNode(`${entry.activity} aktivitetsnivå`);
       }      
-      const resultText     = document.createTextNode("Anbefalt mengde: " + entry.result);
+      const resultText     = document.createTextNode(`Anbefalt mengde: ${entry.result}`);
       const dateText       = document.createTextNode(timestamp);
       let ageText;
       if (entry.age === 1) {
-        ageText = document.createTextNode(entry.age + " måned");
+        ageText = document.createTextNode(`${entry.age} måned`);
       } else {
-        ageText = document.createTextNode(entry.age + " måneder");
+        ageText = document.createTextNode(`${entry.age} måneder`);
       }
 
       // Append the history content to the various entry elements
@@ -404,7 +404,6 @@ function updateHistory() {
       timestampSpan   .appendChild(dateText);
       resultPage      .appendChild(document.createElement("br"));
       resultPage      .appendChild(ageText);
-      resultPage      .appendChild(document.createElement("br"));
       resultPweight   .appendChild(document.createElement("br"));
       resultPweight   .appendChild(weightText);
       resultPactivity .appendChild(activityValue);
