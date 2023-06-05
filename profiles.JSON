@@ -1,8 +1,8 @@
 {
     "profiles": [
         {
-            "kategori": "VALP",
-            "kategoriSize": "clamp(1em, 12vw, 2.85em)",
+            "category": "VALP",
+            "categorySize": "clamp(1em, 12vw, 2.85em)",
             "bgColor": "#006f43",
             "border": "3px solid #006f43",
             "imgSrc": "valp.png",
@@ -19,8 +19,8 @@
             "showAge": "block"
         },
         {
-            "kategori": "VOKSEN",
-            "kategoriSize": "clamp(1em, 12vw, 2.85em)",
+            "category": "VOKSEN",
+            "categorySize": "clamp(1em, 12vw, 2.85em)",
             "bgColor": "#00538a",
             "border": "3px solid #00538a",
             "imgSrc": "voksen.png",
@@ -37,8 +37,8 @@
             "showAge": "none"
         },
         {
-            "kategori": "AKTIV",
-            "kategoriSize": "clamp(1em, 12vw, 2.85em)",
+            "category": "AKTIV",
+            "categorySize": "clamp(1em, 12vw, 2.85em)",
             "bgColor": "#b51826",
             "border": "3px solid #b51826",
             "imgSrc": "aktiv.png",
@@ -55,8 +55,8 @@
             "showAge": "none"
         },
         {
-            "kategori": "EKSTREM ENERGI",
-            "kategoriSize": "clamp(0.5em, 10vw, 2.3em)",
+            "category": "EKSTREM ENERGI",
+            "categorySize": "clamp(0.5em, 10vw, 2.3em)",
             "bgColor": "#02304f",
             "border": "3px solid #02304f",
             "imgSrc": "ekstrem.png",
@@ -73,8 +73,8 @@
             "showAge": "none"
         },
         {
-            "kategori": "SENSITIV",
-            "kategoriSize": "clamp(0.5em, 10vw, 2.5em)",
+            "category": "SENSITIV",
+            "categorySize": "clamp(0.5em, 10vw, 2.5em)",
             "bgColor": "#a0715c",
             "border": "3px solid #a0715c",
             "imgSrc": "sensitiv.png",
@@ -91,8 +91,8 @@
             "showAge": "none"
         },
         {
-            "kategori": "SENIOR",
-            "kategoriSize": "clamp(1em, 12vw, 2.85em)",
+            "category": "SENIOR",
+            "categorySize": "clamp(1em, 12vw, 2.85em)",
             "bgColor": "#c84e2d",
             "border": "3px solid #c84e2d",
             "imgSrc": "senior.png",
@@ -109,8 +109,8 @@
             "showAge": "none"
         },
         {
-            "kategori": "VEKTKONTROLL",
-            "kategoriSize": "clamp(0.8em, 6vw, 1.45em)",
+            "category": "VEKTKONTROLL",
+            "categorySize": "clamp(0.8em, 6vw, 1.45em)",
             "bgColor": "#b41c69",
             "border": "3px solid #b41c69",
             "imgSrc": "vektkontroll.png",

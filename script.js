@@ -49,7 +49,7 @@ async function updateProfile() {
   const profile = profiles[currentIndex];
 
   // Profile CSS styles
-  document.getElementById   ("navi")        .style.fontSize         = profile.kategoriSize;
+  document.getElementById   ("navi")        .style.fontSize         = profile.categorySize;
   document.getElementById   ("activity")    .style.fontSize         = profile.font;
   document.getElementById   ("cutWeight")   .style.backgroundColor  = profile.bgColor;
   document.getElementById   ("cutAge")      .style.backgroundColor  = profile.bgColor;
@@ -64,7 +64,7 @@ async function updateProfile() {
   document.getElementById   ("stort")       .dataset.caption        = profile.caption;
 
   // Change category and select options text
-  document.getElementById   ("kategori")    .textContent            = profile.kategori;
+  document.getElementById   ("category")    .textContent            = profile.category;
   document.getElementById   ("lavt")        .textContent            = profile.lavt;
   document.getElementById   ("hoyt")        .textContent            = profile.hoyt;
 
@@ -83,7 +83,7 @@ async function updateProfile() {
   document.getElementById   ("activity")    .value = "";
 
   // Make "age required" optional depending on active profile
-  if (profile.kategori !== "VALP") {
+  if (profile.category !== "VALP") {
     document.getElementById("age").removeAttribute("required");
   } else {
     document.getElementById("age").setAttribute("required", "");
@@ -110,13 +110,13 @@ document.getElementById("right").addEventListener("click", async () => {
 
 
 //  Calculate the recommended amount of dogfood on the active profile
-async function calculateFoodAmount(kategori, age, weight, activity) {
+async function calculateFoodAmount(category, age, weight, activity) {
   let foodAmount = "";
   // Calculation for puppies
-  if (kategori === "VALP") {
+  if (category === "VALP") {
     const foodTypesData = await fetchFoodTypesData();
 
-    const categoryObj = foodTypesData.foodAmounts.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmounts.find((item) => item.category === category);
 
     if (categoryObj) {
       const { ageRanges } = categoryObj;
@@ -157,10 +157,10 @@ async function calculateFoodAmount(kategori, age, weight, activity) {
       }
     }
   // Calculations for adult dogs
-  } else if (kategori === "VOKSEN" || kategori === "SENIOR" || kategori === "SENSITIV" || kategori === "VEKTKONTROLL") {
+  } else if (category === "VOKSEN" || category === "SENIOR" || category === "SENSITIV" || category === "VEKTKONTROLL") {
     const foodTypesData = await fetchFoodTypesData();
 
-    const categoryObj = foodTypesData.foodAmountsADULT.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmountsADULT.find((item) => item.category === category);
 
     if (categoryObj) {
       const { weightRanges } = categoryObj;
@@ -220,7 +220,7 @@ async function calculateFoodAmount(kategori, age, weight, activity) {
       return closestWeight;
     }
 
-    const categoryObj = foodTypesData.foodAmountsENERGY.find((item) => item.kategori === kategori);
+    const categoryObj = foodTypesData.foodAmountsENERGY.find((item) => item.category === category);
 
     if (categoryObj) {
       const { weightRanges } = categoryObj;
@@ -256,7 +256,7 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
 
   // Define inputs
   const profiles = await fetchProfilesData();
-  const kategori = profiles[currentIndex].kategori;
+  const category = profiles[currentIndex].category;
   const age = parseInt(document.getElementById("age").value, 10);
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = document.getElementById("activity").value;
@@ -265,7 +265,7 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
   const content = card.find(".entries");
 
   // Calculate food amount based on the inputs
-  const foodAmount = await calculateFoodAmount(kategori, age, weight, activity);
+  const foodAmount = await calculateFoodAmount(category, age, weight, activity);
 
   // Display the result on the webpage
   document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
@@ -299,16 +299,29 @@ if (localStorage.getItem("historyList")) {
 }
 
 
+// Extract the activity text to be used in the history entry
+const selectElement = document.getElementById("activity");
+let selectedText; // Declare selectedText outside the event listener function
+
+selectElement.addEventListener("change", function() {
+  const selectedOption = selectElement.options[selectElement.selectedIndex];
+  selectedText = selectedOption.text; // Update the value of selectedText
+});
+
+
 // Store the calculated results, input values and profile data to the history array
 async function storeResult() {
+
+  // Define the entry values
   const profiles = await fetchProfilesData();
-  const profile = profiles[currentIndex].kategori;
+  const profile = profiles[currentIndex].category;
   const age = parseInt(document.getElementById("age").value, 10);
   const weight = parseInt(document.getElementById("weight").value, 10);
-  const activity = document.getElementById("activity").value;
+  const activity = selectedText;
   const result = document.getElementById("foodAmount").textContent;
   const timestamp = new Date().toLocaleDateString();
 
+  // Define the entry object that stores the values
   const entry = {
     profile: profile,
     age: age,
@@ -318,7 +331,7 @@ async function storeResult() {
     timestamp: timestamp
   };
 
-  // Add the new entry to the beginning of the array, and keep only the 10 last entries
+  // Add the new entry object to the beginning of the array, and keep only the 10 last entries
   historyList.unshift(entry);
   historyList = historyList.slice(0, 10);
 
@@ -344,36 +357,37 @@ function updateHistory() {
   // Create the history list entry and its content
   } else {
     for (let i = 0; i < historyList.length; i++) {
-      const entry = historyList[i];
-      const entryDiv = document.createElement("div");
-      const resultPage = document.createElement("p");
-      const resultPweight = document.createElement("p");
-      const resultPactivity = document.createElement("p");
-      const resultPresult = document.createElement("p");
-      const resultPspacer = document.createElement("p");
-      const resultP = document.createElement("div");
+      const entry            = historyList[i];
+      const entryDiv         = document.createElement("div");
+      const resultPage       = document.createElement("p");
+      const resultPweight    = document.createElement("p");
+      const resultPactivity  = document.createElement("p");
+      const resultPresult    = document.createElement("p");
+      const resultPspacer    = document.createElement("p");
+      const resultP          = document.createElement("div");
       const resultPtimeStamp = document.createElement("div");
-      const categorySpan = document.createElement("span");
-      const timestampSpan = document.createElement("span");
-      const lastMonthSpan = document.createElement("span");
-      const lastMonthLink = document.createElement("span");
+      const categorySpan     = document.createElement("span");
+      const timestampSpan    = document.createElement("span");
+      const lastMonthSpan    = document.createElement("span");
+      const lastMonthLink    = document.createElement("span");
 
       // Define and set the timestamp format
       const options = { year: "numeric", month: "long", day: "numeric" };
       const timestamp = new Date(entry.timestamp).toLocaleDateString("no-NO", options);
 
       // Define the history entry content
-      const categoryText = document.createTextNode(entry.profile);
-      const changeText = document.createTextNode("Siste måned på valpefôr");
-      const lastMonth = document.createTextNode("LABB har flere gode fôr-alternativer til din hund, og vi anbefaler å starte på LABB VOKSEN. Se vårt sortiment på ");
-      const link = document.createElement("a");
-            link.href = "https://www.labb.no"; // Replace with the actual URL
-            link.textContent = "LABB.no";
-            link.target = "_blank"
-      const weightText = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
-      const activityText = document.createTextNode("Aktivitetsnivå: " + entry.activity);
-      const resultText = document.createTextNode("Mengde: " + entry.result);
-      const dateText = document.createTextNode(timestamp);
+      const categoryText   = document.createTextNode(entry.profile);
+      const changeText     = document.createTextNode("Siste måned på valpefôr");
+      const lastMonth      = document.createTextNode("LABB har flere gode alternativer til din hund, og vi anbefaler å starte på LABB VOKSEN. Se vårt sortiment på ");
+      const link           = document.createElement("a");
+            link             .href = "https://www.labb.no"; // Replace with the actual URL
+            link             .textContent = "LABB.no";
+            link             .target = "_blank"
+      const weightText     = document.createTextNode("Hundens vekt: " + entry.weight + " kg");
+      const activityValue  = document.createTextNode(entry.activity);
+      const activityText   = document.createTextNode("Aktivitetsnivå: ");
+      const resultText     = document.createTextNode("Mengde: " + entry.result);
+      const dateText       = document.createTextNode(timestamp);
       let ageText;
       if (entry.age === 1) {
         ageText = document.createTextNode(entry.age + " måned");
@@ -383,26 +397,30 @@ function updateHistory() {
 
       // Append the history content to the various entry elements
       resultPtimeStamp.className = "timestamp";
-      categorySpan.appendChild(categoryText);
-      timestampSpan.appendChild(dateText);
-      resultPage.appendChild(document.createElement("br"));
-      resultPage.appendChild(ageText);
-      resultPage.appendChild(document.createElement("br"));
-      resultPweight.appendChild(document.createElement("br"));
-      resultPweight.appendChild(weightText);
-      resultPactivity.appendChild(activityText);
-      resultPresult.appendChild(resultText);
-      resultPspacer.appendChild(document.createElement("br"));
-      resultPspacer.appendChild(document.createElement("hr"));
+      resultP         .className = "entry-spacing";
+      categorySpan    .appendChild(categoryText);
+      timestampSpan   .appendChild(dateText);
+      resultPage      .appendChild(document.createElement("br"));
+      resultPage      .appendChild(ageText);
+      resultPage      .appendChild(document.createElement("br"));
+      resultPweight   .appendChild(document.createElement("br"));
+      resultPweight   .appendChild(weightText);
+      if (!(["AKTIV", "EKSTREM ENERGI"].includes(entry.profile))) {
+        resultPactivity.appendChild(activityText);
+      }      
+      resultPactivity .appendChild(activityValue);
+      resultPresult   .appendChild(resultText);
+      resultPspacer   .appendChild(document.createElement("br"));
+      resultPspacer   .appendChild(document.createElement("hr"));
       if (entry.age === 16) {
-        resultPspacer.appendChild(document.createElement("br"));
-        lastMonthSpan.classList.add("last-month");
-        lastMonthSpan.appendChild(changeText);
-        resultPspacer.appendChild(lastMonthSpan);
-        resultPspacer.appendChild(document.createElement("br"));
-        resultPspacer.appendChild(lastMonthLink);
-        lastMonthLink.appendChild(lastMonth);
-        lastMonthLink.appendChild(link);
+        lastMonthSpan .classList.add("last-month");
+        resultPspacer .appendChild(document.createElement("br"));
+        lastMonthSpan .appendChild(changeText);
+        resultPspacer .appendChild(lastMonthSpan);
+        resultPspacer .appendChild(document.createElement("br"));
+        resultPspacer .appendChild(lastMonthLink);
+        lastMonthLink .appendChild(lastMonth);
+        lastMonthLink .appendChild(link);
       }
 
       // Add a style-class to each history entry based on the active profile
@@ -410,16 +428,16 @@ function updateHistory() {
       entryDiv.classList.add("entry");
 
       // Combine the entry elements to construct the entry and append it to the webpage
-      resultPtimeStamp.appendChild(categorySpan);
-      resultPtimeStamp.appendChild(timestampSpan);
-      entryDiv.appendChild(resultPtimeStamp);
+      resultPtimeStamp  .appendChild(categorySpan);
+      resultPtimeStamp  .appendChild(timestampSpan);
+      entryDiv          .appendChild(resultPtimeStamp);
       if (entry.profile === "VALP") {resultP.appendChild(resultPage);}
-      resultP.appendChild(resultPweight);
-      resultP.appendChild(resultPactivity);
-      resultP.appendChild(resultPresult);
-      resultP.appendChild(resultPspacer);
-      entryDiv.appendChild(resultP);
-      historyDiv.appendChild(entryDiv);
+        resultP         .appendChild(resultPweight);
+        resultP         .appendChild(resultPactivity);
+        resultP         .appendChild(resultPresult);
+        resultP         .appendChild(resultPspacer);
+        entryDiv        .appendChild(resultP);
+        historyDiv      .appendChild(entryDiv);
     }
   }
 }

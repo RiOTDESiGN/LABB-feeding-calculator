@@ -298,6 +298,10 @@ select {
     padding: 16px;
     border-radius: 10px;
 }
+.entry-spacing > *:not(:last-child, :first-child) {
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
 
 .last-month {
     display: flex;

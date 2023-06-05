@@ -1,7 +1,7 @@
 {
     "foodAmounts": [
       {
-        "kategori": "VALP",
+        "category": "VALP",
         "ageRanges": [
           {
             "ageRange": [1, 5],
@@ -62,7 +62,7 @@
     ],
     "foodAmountsADULT": [
       {
-        "kategori": "VOKSEN",
+        "category": "VOKSEN",
         "weightRanges": [
           { "caWeight": 15, "amount": "220" },
           { "caWeight": 20, "amount": "280" },
@@ -79,7 +79,7 @@
         ]
       },
       {
-        "kategori": "SENIOR",
+        "category": "SENIOR",
         "weightRanges": [
           { "caWeight": 15, "amount": "200" },
           { "caWeight": 20, "amount": "240" },
@@ -97,7 +97,7 @@
         ]
       },
       {
-        "kategori": "SENSITIV",
+        "category": "SENSITIV",
         "weightRanges": [
           { "caWeight": 15, "amount": "210" },
           { "caWeight": 20, "amount": "270" },
@@ -114,7 +114,7 @@
         ]
       },
       {
-        "kategori": "VEKTKONTROLL",
+        "category": "VEKTKONTROLL",
         "weightRanges": [
           { "caWeight": 15, "amount": "210" },
           { "caWeight": 20, "amount": "240" },
@@ -134,7 +134,7 @@
     ],
       "foodAmountsENERGY": [
     {
-      "kategori": "AKTIV",
+      "category": "AKTIV",
       "weightRanges": [
         { "weight": 8, "amountL": "120", "amountH": "140" },
         { "weight": 10, "amountL": "160", "amountH": "190" },
@@ -155,7 +155,7 @@
       ]
     },
     {
-      "kategori": "EKSTREM ENERGI",
+      "category": "EKSTREM ENERGI",
       "weightRanges": [
         { "weight": 10, "amountL": "180", "amountH": "300" },
         { "weight": 15, "amountL": "220", "amountH": "405" },
