@@ -409,6 +409,9 @@ select {
     cursor: pointer;
     transition: .3s;
 }
+.contract:hover {
+    opacity: 0.9;
+}
 
 /* ******************************************************************* */
 

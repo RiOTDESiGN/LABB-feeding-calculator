@@ -270,9 +270,9 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
   document.getElementById("historyTab").style.display = "block";
   document.getElementById("result").style.display = "block";
   if (content.is(":visible")) {
-    document.getElementById("reset").style.display = "block";
-  } else {
     document.getElementById("reset").style.display = "none";
+  } else {
+    document.getElementById("reset").style.display = "block";
   }
 
   // document.getElementById("reset").style.display = "block";
