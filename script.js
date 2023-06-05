@@ -261,6 +261,9 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = document.getElementById("activity").value;
 
+  const card = $(this).closest(".flex-card");
+  const content = card.find(".entries");
+
   // Calculate food amount based on the inputs
   const foodAmount = await calculateFoodAmount(kategori, age, weight, activity);
 
@@ -268,7 +271,13 @@ document.getElementById("puppyForm").addEventListener("submit", async function (
   document.getElementById("foodAmount").textContent = `${foodAmount} gram pr. dag`;
   document.getElementById("historyTab").style.display = "block";
   document.getElementById("result").style.display = "block";
-  document.getElementById("reset").style.display = "block";
+  if (content.is(":visible")) {
+    document.getElementById("reset").style.display = "block";
+  } else {
+    document.getElementById("reset").style.display = "none";
+  }
+
+  // document.getElementById("reset").style.display = "block";
   document.getElementById("history").style.alignItems = "normal";
 
   // Add results to history
@@ -423,9 +432,13 @@ $(document).ready(function() {
     const content = card.find(".entries");
 
     if (content.is(":visible")) {
+      document.getElementById("expand").classList.remove("contract");
+      document.getElementById("expand").classList.add("expand");
       document.getElementById("reset").style.display = "none";
       content.slideUp();
     } else {
+      document.getElementById("expand").classList.remove("expand");
+      document.getElementById("expand").classList.add("contract");
       document.getElementById("reset").style.display = "block";
       $(".entries").slideUp();
       content.slideDown();
