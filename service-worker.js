@@ -39,7 +39,6 @@ self.addEventListener("install", (event) => {
           'favicon.ico',
           'mstile-150x150.png',
           'safari-pinned-tab.svg',
-          'site.webmanifest',
           // Add other files and assets you want to cache
         ])
     );
