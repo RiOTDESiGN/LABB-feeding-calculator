@@ -79,6 +79,7 @@ async function updateProfile() {
   document.getElementById   ("hoyt")        .textContent            = profile.hoyt;
 
   // Change links and image sources
+  document.getElementById   ("FK")          .href                   = profile.FK;
   document.getElementById   ("stort")       .href                   = profile.imgHref;
   document.getElementById   ("lite")        .src                    = profile.imgSrc;
 

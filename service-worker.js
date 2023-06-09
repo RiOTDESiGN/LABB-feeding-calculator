@@ -26,6 +26,10 @@ self.addEventListener("install", (event) => {
           'JSON/foodTypes.JSON',
           'JSON/profiles.JSON',
           'FONTS/ultramagneticbold.ttf',
+          'manifest.json',
+          'script.js',
+          'styles.css',
+          'index.html',
           // Add other files and assets you want to cache
         ])
     );
