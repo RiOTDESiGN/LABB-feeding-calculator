@@ -1,13 +1,13 @@
 {
     "name": "LABB Hundemat Kalkulator",
     "short_name": "LABB",
-    "start_url": "Puppy-Feeder/",
+    "start_url": "https://erik-r-u-kodehode.github.io/Puppy-Feeder/",
     "display": "standalone",
     "background_color": "#dad4c7",
     "theme_color": "#000000",
     "icons": [
       {
-        "src": "IMAGES/left-arrow.png",
+        "src": "https://erik-r-u-kodehode.github.io/Puppy-Feeder/IMAGES/left-arrow.png",
         "sizes": "60x60",
         "type": "image/png"
       }
