@@ -330,7 +330,8 @@ async function storeResult() {
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = selectedText;
   const result = document.getElementById("foodAmount").textContent;
-  const timestamp = new Date().toLocaleDateString();
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const timestamp = new Date().toLocaleDateString("en-US", options);
 
   // Define the entry object that stores the values
   const entry = {
@@ -384,8 +385,8 @@ function updateHistory() {
 
       // Define and set the timestamp format
       const options = { year: "numeric", month: "long", day: "numeric" };
-      const timestamp = new Date(entry.timestamp).toLocaleDateString("no-NO", options);
-
+      const timestamp = new Date(entry.timestamp).toLocaleDateString("en-US", options);
+      
       // Define the history entry content
       const categoryText   = document.createTextNode(entry.profile);
       const changeText     = document.createTextNode("Siste måned på valpefôr");
