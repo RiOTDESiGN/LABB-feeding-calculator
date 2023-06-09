@@ -23,6 +23,7 @@ self.addEventListener("install", (event) => {
           'IMAGES/FK.svg',
           'IMAGES/left-arrow.png',
           'IMAGES/Logo-Labb.png',
+          'IMAGES/Logo-Labb-App.png',
           'JSON/foodTypes.JSON',
           'JSON/profiles.JSON',
           'FONTS/ultramagneticbold.ttf',
