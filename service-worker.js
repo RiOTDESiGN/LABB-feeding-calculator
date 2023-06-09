@@ -31,14 +31,14 @@ self.addEventListener("install", (event) => {
           '/script.js',
           '/styles.css',
           '/index.html',
-          '/android-chrome-144x144.png',
-          '/apple-touch-icon.png',
           '/browserconfig.xml',
+          'IMAGES/android-chrome-144x144.png',
+          'IMAGES/apple-touch-icon.png',
           'IMAGES/favicon-16x16.png',
-          'https://erik-r-u-kodehode.github.io/Puppy-Feeder/favicon-32x32.png',
-          '/favicon.ico',
-          '/mstile-150x150.png',
-          '/safari-pinned-tab.svg',
+          'IMAGES/favicon-32x32.png',
+          'IMAGES/favicon.ico',
+          'IMAGES/mstile-150x150.png',
+          'IMAGES/safari-pinned-tab.svg',
           // Add other files and assets you want to cache
         ])
     );
