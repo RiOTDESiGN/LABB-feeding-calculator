@@ -1,7 +1,7 @@
 {
     "name": "LABB Hundemat Kalkulator",
     "short_name": "LABB",
-    "start_url": ".",
+    "start_url": "Puppy-Feeder/",
     "display": "standalone",
     "background_color": "#dad4c7",
     "theme_color": "#000000",
