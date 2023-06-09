@@ -31,6 +31,15 @@ self.addEventListener("install", (event) => {
           'script.js',
           'styles.css',
           'index.html',
+          'android-chrome-144x144.png',
+          'apple-touch-icon.png',
+          'browserconfig.xml',
+          'favicon-16x16.png',
+          'favicon-32x32.png',
+          'favicon.ico',
+          'mstile-150x150.png',
+          'safari-pinned-tab.svg',
+          'site.webmanifest',
           // Add other files and assets you want to cache
         ])
     );
