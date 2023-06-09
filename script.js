@@ -1,3 +1,14 @@
+// Register the PWA Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+      console.log('ServiceWorker registered with scope:', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed:', err);
+    });
+  });
+}
+
 //  Fancybox eventlistener
 Fancybox.bind("[data-fancybox]", {})
 
@@ -47,6 +58,7 @@ async function updateProfile() {
   const profile = profiles[currentIndex];
 
   // Profile CSS styles
+  document.getElementById   ("expand")      .style.filter           = profile.contract;
   document.getElementById   ("navi")        .style.fontSize         = profile.categorySize;
   document.getElementById   ("activity")    .style.fontSize         = profile.font;
   document.getElementById   ("cutWeight")   .style.backgroundColor  = profile.bgColor;

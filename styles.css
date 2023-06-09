@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Ultramagnetic-Bold';
-    src: url('FONTS/Ultramagnetic Bold.ttf')  format('truetype')
+    src: url('FONTS/Ultramagnetic_Bold.ttf')  format('truetype')
   }
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');
@@ -84,19 +84,35 @@ h3 {
     height: 80px;
 }
 
-.arrow {
+.arrow-left {
     width: 20%;
     margin: 0 auto;
     object-fit: cover;
     opacity: 0.3;
     cursor: pointer;
+    transition: .2s;
 }
-
-.arrow:hover {
+.arrow-left:hover {
     opacity: 1;
 }
+.arrow-left:active {
+    scale: 0.95;
+    transition: 0.1s;
+}
 
-.arrow:active {
+.arrow-right {
+    width: 20%;
+    margin: 0 auto;
+    object-fit: cover;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: .2s;
+    transform:rotate(180deg)
+}
+.arrow-right:hover {
+    opacity: 1;
+}
+.arrow-right:active {
     scale: 0.95;
     transition: 0.1s;
 }
@@ -264,7 +280,6 @@ select {
 
 .reset:hover {
     color: #000;
-    box-shadow: 0px 0px 4px white;
 }
 
 .reset:active {
@@ -341,10 +356,6 @@ select {
     background-color: #00538a;
 }
 
-.voksen {
-    background-color: #00538a;
-}
-
 .aktiv {
     background-color: #b51826;
 }
@@ -374,13 +385,14 @@ select {
 }
 
 .expand {
-    width: 20%;
+    width: 10%;
     margin: 0 auto;
     object-fit: cover;
     opacity: 0.5;
     filter: invert();
     transform: rotate(-90deg);
     cursor: pointer;
+    filter: invert(19%) sepia(99%) saturate(1409%) hue-rotate(182deg) brightness(97%) contrast(102%);
     transition: .3s;
     animation-name: pulse;
     animation-duration: 1s;
@@ -392,7 +404,7 @@ select {
         opacity: 0.2;
     }
     50% {
-        opacity: 0.5;
+        opacity: 0.9;
     }
     100% {
         opacity: 0.2;
@@ -400,7 +412,7 @@ select {
 }
 
 .contract {
-    width: 20%;
+    width: 10%;
     margin: 0 auto;
     object-fit: cover;
     opacity: 0.5;

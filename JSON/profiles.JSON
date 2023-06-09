@@ -16,7 +16,8 @@
             "fontpadding": "14px 0",
             "min": "1",
             "max": "80",
-            "showAge": "block"
+            "showAge": "block",
+            "contract": "invert(32%) sepia(15%) saturate(3230%) hue-rotate(113deg) brightness(94%) contrast(103%)"
         },
         {
             "category": "VOKSEN",
@@ -34,7 +35,8 @@
             "fontpadding": "14px 0",
             "min": "15",
             "max": "80",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(19%) sepia(99%) saturate(1409%) hue-rotate(182deg) brightness(97%) contrast(102%)"
         },
         {
             "category": "AKTIV",
@@ -52,7 +54,8 @@
             "fontpadding": "14px 0",
             "min": "8",
             "max": "90",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(14%) sepia(57%) saturate(5827%) hue-rotate(346deg) brightness(86%) contrast(93%)"
         },
         {
             "category": "EKSTREM ENERGI",
@@ -70,7 +73,8 @@
             "fontpadding": "17px 0",
             "min": "8",
             "max": "60",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(12%) sepia(56%) saturate(2484%) hue-rotate(184deg) brightness(90%) contrast(98%)"
         },
         {
             "category": "SENSITIV",
@@ -88,7 +92,8 @@
             "fontpadding": "14px 0",
             "min": "15",
             "max": "80",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(49%) sepia(20%) saturate(725%) hue-rotate(333deg) brightness(93%) contrast(94%)"
         },
         {
             "category": "SENIOR",
@@ -106,7 +111,8 @@
             "fontpadding": "14px 0",
             "min": "15",
             "max": "90",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(48%) sepia(79%) saturate(5176%) hue-rotate(351deg) brightness(87%) contrast(78%)"
         },
         {
             "category": "VEKTKONTROLL",
@@ -124,7 +130,8 @@
             "fontpadding": "14px 0",
             "min": "15",
             "max": "90",
-            "showAge": "none"
+            "showAge": "none",
+            "contract": "invert(22%) sepia(54%) saturate(3074%) hue-rotate(307deg) brightness(88%) contrast(102%)"
         }
     ]
 }
