@@ -1,6 +1,8 @@
 {
     "name": "LABB Hundemat Kalkulator",
     "short_name": "LABB",
+    "description": "LABBs egen fôrkalkulator for produktene VALP, VOKSEN, AKTIV, EKSTREM ENERGI, SENSITIV, SENIOR og VEKTKONTROLL.",
+    "lang": "nb-NO",
     "start_url": "https://erik-r-u-kodehode.github.io/Puppy-Feeder/",
     "display": "standalone",
     "background_color": "#dad4c7",
