@@ -25,7 +25,7 @@ self.addEventListener("install", (event) => {
           'IMAGES/Logo-Labb.png',
           'JSON/foodTypes.JSON',
           'JSON/profiles.JSON',
-          'FONTS/Ultramagnetic_Bold.tff',
+          'FONTS/ultramagneticbold.ttf',
           // Add other files and assets you want to cache
         ])
     );
