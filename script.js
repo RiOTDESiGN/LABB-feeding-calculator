@@ -330,8 +330,16 @@ async function storeResult() {
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = selectedText;
   const result = document.getElementById("foodAmount").textContent;
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const timestamp = new Date().toLocaleDateString("nb-NO", options);
+  // const options = { year: "numeric", month: "long", day: "numeric" };
+  // const timestamp = new Date().toLocaleDateString("nb-NO", options);
+
+const options = { year: "numeric", month: "long", day: "numeric" };
+const date = new Date();
+const year = date.getFullYear();
+const month = date.toLocaleString("nb-NO", { month: "long" });
+const day = date.getDate();
+const timestamp = `${day}. ${month}, ${year}`;
+
 
   // Define the entry object that stores the values
   const entry = {
@@ -382,10 +390,6 @@ function updateHistory() {
       const timestampSpan    = document.createElement("span");
       const lastMonthSpan    = document.createElement("span");
       const lastMonthLink    = document.createElement("span");
-
-      // Define and set the timestamp format
-      const options = { year: "numeric", month: "long", day: "numeric" };
-      const timestamp = new Date(entry.timestamp).toLocaleDateString("nb-NO", options);
       
       // Define the history entry content
       const categoryText   = document.createTextNode(entry.profile);
@@ -403,7 +407,7 @@ function updateHistory() {
         activityValue = document.createTextNode(`${entry.activity} aktivitetsnivå`);
       }      
       const resultText     = document.createTextNode(`Anbefalt mengde: ${entry.result}`);
-      const dateText       = document.createTextNode(timestamp);
+      const dateText       = document.createTextNode(entry.timestamp);
       let ageText;
       if (entry.age === 1) {
         ageText = document.createTextNode(`${entry.age} måned`);
