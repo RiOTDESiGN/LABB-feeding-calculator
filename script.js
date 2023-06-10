@@ -330,14 +330,14 @@ async function storeResult() {
   const weight = parseInt(document.getElementById("weight").value, 10);
   const activity = selectedText;
   const result = document.getElementById("foodAmount").textContent;
-  // const options = { year: "numeric", month: "long", day: "numeric" };
-  // const timestamp = new Date().toLocaleDateString("nb-NO", options);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const timestamp = new Date().toLocaleDateString(["nb-NO", "en-US", "default"], options);
 
-const date = new Date();
-const year = date.getFullYear();
-const month = date.toLocaleString(["nb-NO", "en-US", "default"], { month: "long" });
-const day = date.getDate();
-const timestamp = `${day}. ${month}, ${year}`;
+// const date = new Date();
+// const year = date.getFullYear();
+// const month = date.toLocaleString(["nb-NO", "en-US", "default"], { month: "long" });
+// const day = date.getDate();
+// const timestamp = `${day}. ${month}, ${year}`;
 
 
   // Define the entry object that stores the values
