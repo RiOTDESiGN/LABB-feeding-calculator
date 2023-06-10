@@ -333,10 +333,9 @@ async function storeResult() {
   // const options = { year: "numeric", month: "long", day: "numeric" };
   // const timestamp = new Date().toLocaleDateString("nb-NO", options);
 
-const options = { year: "numeric", month: "long", day: "numeric" };
 const date = new Date();
 const year = date.getFullYear();
-const month = date.toLocaleString("nb-NO", { month: "long" });
+const month = date.toLocaleString(["nb-NO", "en-US", "default"], { month: "long" });
 const day = date.getDate();
 const timestamp = `${day}. ${month}, ${year}`;
 
