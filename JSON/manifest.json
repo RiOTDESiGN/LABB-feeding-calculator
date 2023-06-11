@@ -6,10 +6,10 @@
     "start_url": "https://erik-r-u-kodehode.github.io/Puppy-Feeder/",
     "display": "standalone",
     "background_color": "#dad4c7",
-    "theme_color": "#000000",
+    "theme_color": "#dad4c7",
     "icons": [
       {
-        "src": "https://erik-r-u-kodehode.github.io/Puppy-Feeder/IMAGES/android-chrome-144x144.png",
+        "src": "./IMAGES/android-chrome-144x144.png",
         "sizes": "144x144",
         "type": "image/png",
         "purpose": "any"

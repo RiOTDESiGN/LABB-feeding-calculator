@@ -107,16 +107,24 @@ updateProfile();
 
 
 // Navigation arrows that change the active profile
-document.getElementById("left").addEventListener("click", async () => {
+document.getElementById("left").addEventListener("mousedown", async () => {
+  left.classList.add('activeLeft');
   const profiles = await fetchProfilesData();
   currentIndex = (currentIndex - 1 + profiles.length) % profiles.length;
   updateProfile();
+  setTimeout(function() {
+      left.classList.remove('activeLeft');
+  }, 100);
 });
 
-document.getElementById("right").addEventListener("click", async () => {
+document.getElementById("right").addEventListener("mousedown", async () => {
+  right.classList.add('activeRight');
   const profiles = await fetchProfilesData();
   currentIndex = (currentIndex + 1) % profiles.length;
   updateProfile();
+  setTimeout(function() {
+    right.classList.remove('activeRight');
+}, 100);
 });
 
 
