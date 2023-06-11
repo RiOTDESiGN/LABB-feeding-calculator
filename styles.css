@@ -26,7 +26,8 @@ html, body {
 }
 
 body {
-    user-select: none;
+    -webkit-user-select: none;
+            user-select: none;
     background-color: #dad4c7;
     color: #dad4c7;
     text-align: center;
@@ -37,6 +38,7 @@ body {
 
 body::-webkit-scrollbar {
     display: none;
+    width: 0;
 }
 
 a {
@@ -97,6 +99,7 @@ input {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none; /* Chrome, Safari, Edge, Opera */
+          appearance: none;
   margin: 0;
 }
 input[type=number] {
@@ -119,8 +122,8 @@ input:focus ~ .placeholder {
 }
 
 select {
-    appearance: none;
     -webkit-appearance: none;
+            appearance: none;
     text-align: center;
     width: 100%;
     padding: 14px 0;
@@ -153,7 +156,7 @@ button::after {
 }
 button:active {
     transition: .1s;
-    scale: 0.975;
+    transform: scale(0.975);
 }
 button::after {
     left: -100%;
@@ -195,7 +198,7 @@ button:hover::after {
     filter: invert(95%) sepia(9%) saturate(316%) hue-rotate(357deg) brightness(93%) contrast(83%);
 }
 .labb-logo:hover {
-    scale: 1.04;
+    transform: scale(1.04);
 }
 
 .nocorners {
@@ -222,13 +225,13 @@ button:hover::after {
 
 .activeLeft {
     opacity: 1;
-    scale: 0.95;
+    transform: scale(0.95);
     transition: 0.1s;
 }
 
 .activeRight {
     opacity: 1;
-    scale: 0.95;
+    transform: scale(0.95);
     transition: 0.1s;
 }
 
@@ -446,7 +449,7 @@ button:hover::after {
     color: #000;
 }
 .slett:active {
-    scale: 0.975;
+    transform: scale(0.975);
     transition: 0.1s;
 }
 
@@ -456,5 +459,5 @@ button:hover::after {
     transition: .2s;
 }
 .FK:hover {
-    scale: 1.04;
+    transform: scale(1.04);
 }
