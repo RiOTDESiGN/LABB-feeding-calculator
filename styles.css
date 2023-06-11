@@ -51,7 +51,10 @@ a {
 }
 a img {
     touch-action: manipulation;
-}  
+}
+a img:focus {
+    outline: none;
+}
 a:hover {
     color: #000;
 }
@@ -195,8 +198,6 @@ button:hover::after {
 .labb-logo {
     width: 100%;
     padding: 0 25%;
-    margin: 0 auto;
-    object-fit: cover;
     transition: .2s;
     filter: invert(95%) sepia(9%) saturate(316%) hue-rotate(357deg) brightness(93%) contrast(83%);
 }
@@ -213,29 +214,21 @@ button:hover::after {
     height: 80px;
 }
 
-.arrow-left {
+.arrow {
     width: 20%;
-    margin: 0 auto;
-    object-fit: cover;
     opacity: 0.3;
     cursor: pointer;
     transition: .2s;
 }
 
-.arrow-right {
-    transform: rotate(180deg);
-}
-
 .activeLeft {
     opacity: 1;
     transform: scale(0.95);
-    transition: 0.1s;
 }
 
 .activeRight {
     opacity: 1;
     transform: scale(0.95);
-    transition: 0.1s;
 }
 
 .inputcontainer {
@@ -318,11 +311,9 @@ button:hover::after {
 
 .expand {
     width: 10%;
-    margin: 0 auto;
-    object-fit: cover;
-    transform: rotate(-90deg);
     cursor: pointer;
     transition: .3s;
+    transform: scaleY(-1);
     animation-name: pulse;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -342,11 +333,8 @@ button:hover::after {
 
 .contract {
     width: 10%;
-    margin: 0 auto;
-    object-fit: cover;
     opacity: 0.5;
     filter: invert();
-    transform: rotate(90deg);
     cursor: pointer;
     transition: .3s;
 }
