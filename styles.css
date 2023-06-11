@@ -49,6 +49,9 @@ a {
     font-weight: 600;
     letter-spacing: -.75px;
 }
+a img {
+    touch-action: manipulation;
+}  
 a:hover {
     color: #000;
 }
