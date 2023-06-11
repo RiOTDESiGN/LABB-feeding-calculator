@@ -9,7 +9,7 @@
     "theme_color": "#dad4c7",
     "icons": [
       {
-        "src": "./IMAGES/android-chrome-144x144.png",
+        "src": "../IMAGES/android-chrome-144x144.png",
         "sizes": "144x144",
         "type": "image/png",
         "purpose": "any"
