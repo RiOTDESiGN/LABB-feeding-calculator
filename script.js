@@ -60,15 +60,15 @@ async function updateProfile() {
   // Profile CSS styles
   document.getElementById   ("expand")      .style.filter           = profile.contract;
   document.getElementById   ("navi")        .style.fontSize         = profile.categorySize;
-  document.getElementById   ("activity")    .style.fontSize         = profile.font;
   document.getElementById   ("cutWeight")   .style.backgroundColor  = profile.bgColor;
   document.getElementById   ("cutAge")      .style.backgroundColor  = profile.bgColor;
   document.getElementById   ("puppyForm")   .style.backgroundColor  = profile.bgColor;
+  document.getElementById   ("puppyForm")   .style.border           = profile.border;
   document.getElementById   ("middels")     .style.display          = profile.middels;
   document.getElementById   ("hide")        .style.display          = profile.showAge;
-  document.getElementById   ("puppyForm")   .style.border           = profile.border;
   document.getElementById   ("foodAmount")  .style.color            = profile.amountColor;
   document.getElementById   ("activity")    .style.padding          = profile.fontpadding;
+  document.getElementById   ("activity")    .style.fontSize         = profile.font;
 
   // Change caption on large Fancybox images
   document.getElementById   ("stort")       .dataset.caption        = profile.caption;

@@ -1,77 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="apple-touch-icon" sizes="180x180" href="./IMAGES/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./IMAGES/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./IMAGES/favicon-16x16.png">
-<link rel="mask-icon" href="./IMAGES/safari-pinned-tab.svg" color="#5bbad5">
-<meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="./JSON/manifest.json">
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="script.js" defer></script>
-<link rel="stylesheet" href="styles.css">
-<title>Labb Valpefôr Kalkulator</title>
-</head>
-<body>
-  <div class="container">
-    <div class="logo-container">
-      <a href="https://labb.no/" target="_blank"><img src="IMAGES/Logo-Labb.png" alt="Labb logo" class="labb-logo"></a>
-      <h1>H U N D</h1>
-    </div>
-    <div class="nocorners">
-      <form id="puppyForm">
-        <div id="navi" class="navi">
-          <img src="IMAGES/left-arrow.png" id="left" alt="Left" class="arrow-left"><h3 id="category">VALP</h3><img src="IMAGES/left-arrow.png" id="right" alt="Right" class="arrow-right">
-        </div>
-        <div class="inputcontainer">
-          <div id="hide" class="replace hide">
-            <input type="number" id="age" name="age" required min="1" max="16" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
-            <div id="cutAge" class="cut"></div>
-            <label for="age" class="placeholder">-- Alder --</label>
+  <head>
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#dad4c7">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./IMAGES/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./IMAGES/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./IMAGES/apple-touch-icon.png">
+    <link rel="mask-icon" href="./IMAGES/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="manifest" href="./JSON/manifest.json">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js" defer></script>
+    <title>Labb Valpefôr Kalkulator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="logo-container">
+        <a href="https://labb.no/" target="_blank"><img src="IMAGES/Logo-Labb.png" alt="Labb logo" class="labb-logo"></a>
+        <h1>H U N D</h1>
+      </div>
+      <div class="nocorners">
+        <form id="puppyForm">
+          <div id="navi" class="navi align">
+            <img src="IMAGES/left-arrow.png" id="left" alt="Left" class="arrow-left">
+            <h3 id="category">VALP</h3>
+            <img src="IMAGES/left-arrow.png" id="right" alt="Right" class="arrow-left arrow-right">
           </div>
-          <div class="replace">
-            <input type="number" id="weight" name="weight" required min="8" max="90" oninput="maxInput()" maxlength="2" class="input" placeholder=" " />
-            <div id="cutWeight" class="cut"></div>
-            <label for="weight" class="placeholder">-- Vekt --</label>
+          <div class="inputcontainer">
+            <div id="hide" class="button-container">
+              <input type="number" id="age" name="age" required min="1" max="16" oninput="maxInput()" maxlength="2" placeholder=" " />
+              <div id="cutAge" class="cut"></div>
+              <label for="age" class="placeholder">-- Alder --</label>
+            </div>
+            <div class="button-container">
+              <input type="number" id="weight" name="weight" required min="8" max="90" oninput="maxInput()" maxlength="2" placeholder=" " />
+              <div id="cutWeight" class="cut"></div>
+              <label for="weight" class="placeholder">-- Vekt --</label>
+            </div>
           </div>
+          <div class="selector">
+            <label for="activity"><h2>Aktivitetsnivå:</h2></label>
+            <select id="activity" required>
+                <option value="">-- Velg aktivitetsnivå --</option>
+                <option id="lavt" value="lavt">Lavt</option>
+                <option id="middels" value="middels">Middels</option>
+                <option id="hoyt" value="hoyt">Høyt</option>
+            </select>
+          </div>
+          <button type="submit" class="align">Regn ut</button>
+        </form>
+      </div>
+      <div class="border-container">
+        <div id="result">
+            <h2>Anbefalt mengde:</h2>
+            <p id="foodAmount" class="amount"></p>
         </div>
-        <div class="selector">
-          <label for="activity"><h2>Aktivitetsnivå:</h2></label>
-          <select id="activity" required>
-              <option value="">-- Velg aktivitetsnivå --</option>
-              <option id="lavt" value="lavt">Lavt</option>
-              <option id="middels" value="middels">Middels</option>
-              <option id="hoyt" value="hoyt">Høyt</option>
-          </select>
+        <div class="pose-container">
+            <a id="stort" href="valp.webp" data-fancybox data-caption="Labb Valp hundefôr mellom- og store raser 15 kg">
+            <img id="lite" src="IMAGES/valp.png" alt="15kg pose" class="pose" />
+            </a>
         </div>
-        <button type="submit" class="button-hover">Regn ut</button>
-      </form>
+        <div id="historikk-container" class="historikk-container flex-card">
+          <h2>Historikk over fôringsmengde:</h2>
+          <h2 id="historyTab" class="flex-card-header"><img src="IMAGES/left-arrow.png" id="expand" alt="Expand History" class="contract"></h2>
+          <div id="history" class="entries"></div>
+          <div class="align"><span id="reset" class="slett">slett</span></div>
+        </div>
+        <a id="FK" href="https://www.felleskjopet.no/" target="_blank">
+          <img src="IMAGES/FK.svg" alt="Felleskjøpet logo" class="FK">
+        </a>
+      </div>
     </div>
-    <div class="border-container">
-      <div id="result" class="result">
-          <h2>Anbefalt mengde:</h2>
-          <p id="foodAmount" class="amount"></p>
-      </div>
-      <div class="FK-container">
-          <a id="stort" href="valp.webp" data-fancybox data-caption="Labb Valp hundefôr mellom- og store raser 15 kg">
-          <img id="lite" src="IMAGES/valp.png" alt="15kg pose" class="pose" />
-          </a>
-      </div>
-      <div id="historikk-container" class="historikk-container flex-card">
-        <h2>Historikk over fôringsmengde:</h2>
-        <h2 id="historyTab" class="flex-card-header"><img src="IMAGES/left-arrow.png" id="expand" alt="Expand History" class="contract"></h2>
-        <div id="history" class="entries"></div>
-        <div class="align"><span id="reset" class="reset">slett</span></div>
-      </div>
-      <a id="FK" href="https://www.felleskjopet.no/" target="_blank">
-        <img src="IMAGES/FK.svg" alt="Felleskjøpet logo" class="FK">
-      </a>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
